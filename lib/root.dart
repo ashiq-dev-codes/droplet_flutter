@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:droplet_flutter/app.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +7,14 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: const App(),
+    return DevicePreview(
+      enabled: false,
+      builder: (context) {
+        return GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: const App(),
+        );
+      },
     );
   }
 }
