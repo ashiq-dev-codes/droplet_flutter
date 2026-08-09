@@ -19,14 +19,25 @@ class TodayPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 8),
+
+                  // Kcal
                   _KcalCard(),
-                  SizedBox(height: 16),
+                  SizedBox(height: 32),
+
+                  // Streak
                   _StreakCard(),
                   SizedBox(height: 24),
+
+                  // Activity
                   _ActivitySection(),
                   SizedBox(height: 24),
+
+                  // Workouts
                   _WorkoutsSection(),
                   SizedBox(height: 24),
+
+                  // Week totals
                   _WeekTotalsCard(),
                 ],
               ),
@@ -178,151 +189,148 @@ class _KcalCardState extends State<_KcalCard>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 8, bottom: 32),
-      child: Row(
-        children: [
-          // Left column
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'TODAY · KCAL BURNED',
-                  style: TextStyle(
-                    fontSize: 11,
-                    letterSpacing: 2.2,
-                    fontFamily: AppFont.inter,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.textSecondary,
-                  ),
+    return Row(
+      children: [
+        // Left column
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'TODAY · KCAL BURNED',
+                style: TextStyle(
+                  fontSize: 11,
+                  letterSpacing: 2.2,
+                  fontFamily: AppFont.inter,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textSecondary,
                 ),
-                const SizedBox(height: 6),
-                AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, _) {
-                    final t = Curves.easeOutCubic.transform(_controller.value);
+              ),
+              const SizedBox(height: 6),
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, _) {
+                  final t = Curves.easeOutCubic.transform(_controller.value);
 
-                    return Text(
-                      _formatInt((1842 * t).round()),
-                      style: TextStyle(
-                        fontSize: 84,
-                        letterSpacing: -3.8,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.accentOrange,
-                        fontFamily: AppFont.spaceGrotesk,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 11.59),
-                Row(
-                  children: [
-                    // Goal pill
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6,
-                        horizontal: 9,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.textPrimary,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: AppColors.primary, width: 1),
-                      ),
-                      child: const Text(
-                        'GOAL 2,400',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontFamily: AppFont.inter,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.background,
-                        ),
-                      ),
+                  return Text(
+                    _formatInt((1842 * t).round()),
+                    style: TextStyle(
+                      fontSize: 84,
+                      letterSpacing: -3.8,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.accentOrange,
+                      fontFamily: AppFont.spaceGrotesk,
                     ),
-                    const SizedBox(width: 7),
-                    const Text(
-                      '76% · 558 to go',
+                  );
+                },
+              ),
+              const SizedBox(height: 11.59),
+              Row(
+                children: [
+                  // Goal pill
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6,
+                      horizontal: 9,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.textPrimary,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: AppColors.primary, width: 1),
+                    ),
+                    child: const Text(
+                      'GOAL 2,400',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 11,
                         fontFamily: AppFont.inter,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.background,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  const SizedBox(width: 7),
+                  const Text(
+                    '76% · 558 to go',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: AppFont.inter,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          // Donut chart (rings + % driven by one animated progress value)
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (context, _) {
-              final progress =
-                  0.78 * Curves.easeOutCubic.transform(_controller.value);
+        ),
+        // Donut chart (rings + % driven by one animated progress value)
+        AnimatedBuilder(
+          animation: _controller,
+          builder: (context, _) {
+            final progress =
+                0.78 * Curves.easeOutCubic.transform(_controller.value);
 
-              return SizedBox(
-                width: 131,
-                height: 131,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    SizedBox.expand(
+            return SizedBox(
+              width: 131,
+              height: 131,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox.expand(
+                    child: CircularProgressIndicator(
+                      value: progress,
+                      strokeWidth: 12,
+                      strokeCap: StrokeCap.round,
+                      backgroundColor: AppColors.surface,
+                      valueColor: const AlwaysStoppedAnimation(
+                        AppColors.accentOrange,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(17),
+                    child: SizedBox.expand(
                       child: CircularProgressIndicator(
                         value: progress,
-                        strokeWidth: 12,
+                        strokeWidth: 8,
                         strokeCap: StrokeCap.round,
                         backgroundColor: AppColors.surface,
                         valueColor: const AlwaysStoppedAnimation(
-                          AppColors.accentOrange,
+                          AppColors.accentLime,
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(17),
-                      child: SizedBox.expand(
-                        child: CircularProgressIndicator(
-                          value: progress,
-                          strokeWidth: 8,
-                          strokeCap: StrokeCap.round,
-                          backgroundColor: AppColors.surface,
-                          valueColor: const AlwaysStoppedAnimation(
-                            AppColors.accentLime,
-                          ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'MOVE',
+                        style: TextStyle(
+                          fontSize: 9,
+                          fontFamily: AppFont.inter,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.textSecondary,
                         ),
                       ),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'MOVE',
-                          style: TextStyle(
-                            fontSize: 9,
-                            fontFamily: AppFont.inter,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.textSecondary,
-                          ),
+                      Text(
+                        '${(progress * 100).round()}%',
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                          fontFamily: AppFont.spaceGrotesk,
                         ),
-                        Text(
-                          '${(progress * 100).round()}%',
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
-                            fontFamily: AppFont.spaceGrotesk,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -666,7 +674,6 @@ class _ActivitySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Title row
         Row(
@@ -675,10 +682,10 @@ class _ActivitySection extends StatelessWidget {
             const Text(
               "Today's activity",
               style: TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w600,
                 fontSize: 15,
+                fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
+                fontFamily: AppFont.spaceGrotesk,
               ),
             ),
             Row(
@@ -686,43 +693,44 @@ class _ActivitySection extends StatelessWidget {
                 const Text(
                   'Details',
                   style: TextStyle(
-                    fontFamily: AppFont.inter,
-                    fontWeight: FontWeight.w600,
                     fontSize: 12,
-                    color: AppColors.textPrimary,
+                    fontFamily: AppFont.inter,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textSecondary,
                   ),
                 ),
                 const SizedBox(width: 4),
                 Icon(
-                  LucideIcons.chevronRight,
+                  LucideIcons.arrowUpRight,
                   size: 14,
-                  color: AppColors.textPrimary,
+                  color: AppColors.textSecondary,
                 ),
               ],
             ),
           ],
         ),
         const SizedBox(height: 12),
+
         // 2x2 grid
         Row(
           children: [
             Expanded(
               child: _statCard(
-                LucideIcons.footprints,
-                'STEPS',
-                '8,240',
-                null,
-                '/ 10,000',
+                icon: LucideIcons.footprints,
+                label: 'STEPS',
+                value: '8,240',
+                badge: '/ 10,000',
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: _statCard(
-                LucideIcons.timer,
-                'ACTIVE MIN',
-                '62',
-                'min',
-                '+18% vs avg',
+                icon: LucideIcons.timer,
+                label: 'ACTIVE MIN',
+                value: '62',
+                unit: 'min',
+                badge: '+18% vs avg',
+                color: AppColors.accentLime,
               ),
             ),
           ],
@@ -732,21 +740,19 @@ class _ActivitySection extends StatelessWidget {
           children: [
             Expanded(
               child: _statCard(
-                LucideIcons.heartPulse,
-                'RESTING HR',
-                '54',
-                'bpm',
-                null,
+                icon: LucideIcons.heartPulse,
+                label: 'RESTING HR',
+                value: '54',
+                unit: 'bpm',
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: _statCard(
-                LucideIcons.apple,
-                'INTAKE',
-                '1,420',
-                'kcal',
-                null,
+                icon: LucideIcons.apple,
+                label: 'INTAKE',
+                value: '1,420',
+                unit: 'kcal',
               ),
             ),
           ],
@@ -755,54 +761,56 @@ class _ActivitySection extends StatelessWidget {
     );
   }
 
-  Widget _statCard(
-    IconData icon,
-    String label,
-    String value,
+  Widget _statCard({
     String? unit,
     String? badge,
-  ) {
+    required String label,
+    required String value,
+    required IconData icon,
+    Color color = AppColors.backgroundDark,
+  }) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(24),
+        color: color,
+        borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Icon + label
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(icon, size: 16, color: AppColors.textSecondary),
+              Icon(icon, size: 16, color: AppColors.primary),
               const SizedBox(width: 6),
               Text(
                 label,
                 style: const TextStyle(
-                  fontFamily: AppFont.inter,
-                  fontWeight: FontWeight.w400,
                   fontSize: 10,
                   letterSpacing: 1.8,
+                  fontFamily: AppFont.inter,
+                  fontWeight: FontWeight.w400,
                   color: AppColors.textSecondary,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 50),
+
           // Value
           Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
               Text(
                 value,
                 style: const TextStyle(
-                  fontFamily: AppFont.spaceGrotesk,
-                  fontWeight: FontWeight.w700,
                   fontSize: 34,
-                  height: 1,
                   letterSpacing: -1.7,
+                  fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
+                  fontFamily: AppFont.spaceGrotesk,
                 ),
               ),
               if (unit != null) ...[
@@ -810,10 +818,10 @@ class _ActivitySection extends StatelessWidget {
                 Text(
                   unit,
                   style: const TextStyle(
-                    fontFamily: AppFont.spaceGrotesk,
-                    fontWeight: FontWeight.w500,
                     fontSize: 16,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.textSecondary,
+                    fontFamily: AppFont.spaceGrotesk,
                   ),
                 ),
               ],
@@ -824,10 +832,9 @@ class _ActivitySection extends StatelessWidget {
             Text(
               badge,
               style: const TextStyle(
+                fontSize: 11,
                 fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w400,
-                fontSize: 11,
-                height: 1.5,
                 color: AppColors.textSecondary,
               ),
             ),
