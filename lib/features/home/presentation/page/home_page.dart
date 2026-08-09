@@ -1,4 +1,5 @@
-import 'package:droplet_flutter/shared/theme/app_colors.dart';
+import 'package:droplet_flutter/features/home/presentation/widgets/home_header.dart';
+import 'package:droplet_flutter/shared/widget/background/gradient_background.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,30 +7,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            stops: const [0.1, 0.4, 0.5, 0.6, 0.7, 1],
-            colors: [
-              Color(0xFFCAEBF4),
-              AppColors.whiteColor,
-              AppColors.whiteColor,
-              AppColors.whiteColor,
-              AppColors.whiteColor,
-              Color(0xFFEFFAFB),
+    return GradientBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: Column(
+            children: const [
+              // App Bar
+              HomeHeader(),
+
+              // Body
             ],
-          ),
-        ),
-        child: Center(
-          child: Text(
-            'Home',
-            style: const TextStyle(
-              fontSize: 18,
-              color: AppColors.textSecondary,
-            ),
           ),
         ),
       ),
