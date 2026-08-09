@@ -3,6 +3,16 @@ import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+String _commaFormat(int n) {
+  final s = n.toString();
+  final out = StringBuffer();
+  for (var i = 0; i < s.length; i++) {
+    if (i > 0 && (s.length - i) % 3 == 0) out.write(',');
+    out.write(s[i]);
+  }
+  return out.toString();
+}
+
 class TodayPage extends StatelessWidget {
   const TodayPage({super.key});
 
@@ -668,8 +678,31 @@ class _StreakCardState extends State<_StreakCard>
 }
 
 // ── Today's activity ────────────────────────────────────────────
-class _ActivitySection extends StatelessWidget {
+class _ActivitySection extends StatefulWidget {
   const _ActivitySection();
+
+  @override
+  State<_ActivitySection> createState() => _ActivitySectionState();
+}
+
+class _ActivitySectionState extends State<_ActivitySection>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..forward();
+
+  @override
+  void didUpdateWidget(_ActivitySection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.forward(from: 0); // replay on hot reload / tab return
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -718,16 +751,16 @@ class _ActivitySection extends StatelessWidget {
               child: _statCard(
                 icon: LucideIcons.footprints,
                 label: 'STEPS',
-                value: '8,240',
+                targetValue: 8240,
                 badge: '/ 10,000',
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: _statCard(
-                icon: LucideIcons.timer,
+                icon: LucideIcons.activity,
                 label: 'ACTIVE MIN',
-                value: '62',
+                targetValue: 62,
                 unit: 'min',
                 badge: '+18% vs avg',
                 color: AppColors.accentLime,
@@ -742,16 +775,16 @@ class _ActivitySection extends StatelessWidget {
               child: _statCard(
                 icon: LucideIcons.heartPulse,
                 label: 'RESTING HR',
-                value: '54',
+                targetValue: 54,
                 unit: 'bpm',
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: _statCard(
-                icon: LucideIcons.apple,
+                icon: LucideIcons.forkKnife,
                 label: 'INTAKE',
-                value: '1,420',
+                targetValue: 1420,
                 unit: 'kcal',
               ),
             ),
@@ -765,7 +798,7 @@ class _ActivitySection extends StatelessWidget {
     String? unit,
     String? badge,
     required String label,
-    required String value,
+    required num targetValue,
     required IconData icon,
     Color color = AppColors.backgroundDark,
   }) {
@@ -803,15 +836,21 @@ class _ActivitySection extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
-              Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 34,
-                  letterSpacing: -1.7,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                  fontFamily: AppFont.spaceGrotesk,
-                ),
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, _) {
+                  final t = Curves.easeOutCubic.transform(_controller.value);
+                  return Text(
+                    _commaFormat((targetValue * t).round()),
+                    style: const TextStyle(
+                      fontSize: 34,
+                      letterSpacing: -1.7,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                      fontFamily: AppFont.spaceGrotesk,
+                    ),
+                  );
+                },
               ),
               if (unit != null) ...[
                 const SizedBox(width: 2),
