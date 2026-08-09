@@ -1,3 +1,7 @@
+import 'package:droplet_flutter/features/history/presentation/page/history_page.dart';
+import 'package:droplet_flutter/features/home/presentation/page/home_page.dart';
+import 'package:droplet_flutter/features/insight/presentation/page/insight_page.dart';
+import 'package:droplet_flutter/features/setting/presentation/page/setting_page.dart';
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +18,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   // Placeholder pages — replace with real pages as they're built
   final _pages = const [
-    _PlaceholderPage(label: 'Home'),
-    _PlaceholderPage(label: 'History'),
-    _PlaceholderPage(label: 'Insight'),
-    _PlaceholderPage(label: 'Setting'),
+    HomePage(),
+    HistoryPage(),
+    InsightPage(),
+    SettingPage(),
   ];
 
   @override

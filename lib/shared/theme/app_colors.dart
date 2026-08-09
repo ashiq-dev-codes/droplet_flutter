@@ -121,4 +121,8 @@ class AppColors {
   static const Color green400 = Color(0xFF4ADE80);
   static const Color green500 = Color(0xFF22C55E);
   static const Color green600 = Color(0xFF16A34A);
+
+  // Cyan (for gradient backgrounds, subtle accents)
+  static const Color cyan50 = Color(0xFFEFFAFB);
+  static const Color cyan100 = Color(0xFFCAEBF4);
 }

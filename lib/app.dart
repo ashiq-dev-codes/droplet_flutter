@@ -8,8 +8,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Droplet',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Poppins',
         scaffoldBackgroundColor: AppColors.backgroundLight,
