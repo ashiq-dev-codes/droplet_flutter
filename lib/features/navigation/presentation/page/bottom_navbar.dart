@@ -19,13 +19,14 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int _index = 0;
 
-  static const _pages = <Widget>[
-    TodayPage(),
-    WorkoutsPage(),
-    TodayPage(), // Center action placeholder
-    ProgressPage(),
-    ProfilePage(),
-  ];
+  // Getter: fresh instances so hot-reload rebuilds reach the active page.
+  static List<Widget> get _pages => <Widget>[
+        TodayPage(),
+        WorkoutsPage(),
+        TodayPage(), // Center action placeholder
+        ProgressPage(),
+        ProfilePage(),
+      ];
 
   static const _icons = <IconData>[
     LucideIcons.house,

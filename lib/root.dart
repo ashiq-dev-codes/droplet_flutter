@@ -12,7 +12,7 @@ class AppRoot extends StatelessWidget {
       builder: (context) {
         return GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: const App(),
+          child: App(),
         );
       },
     );

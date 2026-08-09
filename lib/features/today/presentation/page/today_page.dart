@@ -8,7 +8,7 @@ class TodayPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       bottom: false,
       child: Column(
         children: [
@@ -139,8 +139,42 @@ class _TodayHeader extends StatelessWidget {
 }
 
 // ── kcal card (dark) ────────────────────────────────────────────
-class _KcalCard extends StatelessWidget {
+class _KcalCard extends StatefulWidget {
   const _KcalCard();
+
+  @override
+  State<_KcalCard> createState() => _KcalCardState();
+}
+
+class _KcalCardState extends State<_KcalCard>
+    with SingleTickerProviderStateMixin {
+  // One controller drives the number, rings and % so they stay in sync.
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..forward();
+
+  @override
+  void didUpdateWidget(_KcalCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.forward(from: 0); // replay on hot reload / tab return
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String _formatInt(int n) {
+    final s = n.toString();
+    final out = StringBuffer();
+    for (var i = 0; i < s.length; i++) {
+      if (i > 0 && (s.length - i) % 3 == 0) out.write(',');
+      out.write(s[i]);
+    }
+    return out.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,15 +199,22 @@ class _KcalCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 6),
-                const Text(
-                  '1,842',
-                  style: TextStyle(
-                    fontSize: 84,
-                    letterSpacing: -3.8,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.accentOrange,
-                    fontFamily: AppFont.spaceGrotesk,
-                  ),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) {
+                    final t = Curves.easeOutCubic.transform(_controller.value);
+
+                    return Text(
+                      _formatInt((1842 * t).round()),
+                      style: TextStyle(
+                        fontSize: 84,
+                        letterSpacing: -3.8,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.accentOrange,
+                        fontFamily: AppFont.spaceGrotesk,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 11.59),
                 Row(
@@ -214,63 +255,71 @@ class _KcalCard extends StatelessWidget {
               ],
             ),
           ),
-          // Donut chart
-          SizedBox(
-            width: 131,
-            height: 131,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox.expand(
-                  child: CircularProgressIndicator(
-                    value: 0.78,
-                    strokeWidth: 12,
-                    strokeCap: StrokeCap.round,
-                    backgroundColor: AppColors.surface,
-                    valueColor: const AlwaysStoppedAnimation(
-                      AppColors.accentOrange,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(17),
-                  child: SizedBox.expand(
-                    child: CircularProgressIndicator(
-                      value: 0.78,
-                      strokeWidth: 8,
-                      strokeCap: StrokeCap.round,
-                      backgroundColor: AppColors.surface,
-                      valueColor: const AlwaysStoppedAnimation(
-                        AppColors.accentLime,
-                      ),
-                    ),
-                  ),
-                ),
-                const Column(
-                  mainAxisSize: MainAxisSize.min,
+          // Donut chart (rings + % driven by one animated progress value)
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, _) {
+              final progress =
+                  0.78 * Curves.easeOutCubic.transform(_controller.value);
+
+              return SizedBox(
+                width: 131,
+                height: 131,
+                child: Stack(
+                  alignment: Alignment.center,
                   children: [
-                    Text(
-                      'MOVE',
-                      style: TextStyle(
-                        fontSize: 9,
-                        fontFamily: AppFont.inter,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textSecondary,
+                    SizedBox.expand(
+                      child: CircularProgressIndicator(
+                        value: progress,
+                        strokeWidth: 12,
+                        strokeCap: StrokeCap.round,
+                        backgroundColor: AppColors.surface,
+                        valueColor: const AlwaysStoppedAnimation(
+                          AppColors.accentOrange,
+                        ),
                       ),
                     ),
-                    Text(
-                      '78%',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
-                        fontFamily: AppFont.spaceGrotesk,
+                    Padding(
+                      padding: const EdgeInsets.all(17),
+                      child: SizedBox.expand(
+                        child: CircularProgressIndicator(
+                          value: progress,
+                          strokeWidth: 8,
+                          strokeCap: StrokeCap.round,
+                          backgroundColor: AppColors.surface,
+                          valueColor: const AlwaysStoppedAnimation(
+                            AppColors.accentLime,
+                          ),
+                        ),
                       ),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'MOVE',
+                          style: TextStyle(
+                            fontSize: 9,
+                            fontFamily: AppFont.inter,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                        Text(
+                          '${(progress * 100).round()}%',
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textPrimary,
+                            fontFamily: AppFont.spaceGrotesk,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ],
       ),

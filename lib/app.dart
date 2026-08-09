@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       title: 'Pulse',
       theme: AppTheme.light,
       debugShowCheckedModeBanner: false,
-      home: const BottomNavBar(),
+      home: BottomNavBar(),
     );
   }
 }
