@@ -10,24 +10,29 @@ class TodayPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       bottom: false,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(24, 16, 24, 120),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _TodayHeader(),
-            SizedBox(height: 16),
-            _KcalCard(),
-            SizedBox(height: 16),
-            _StreakCard(),
-            SizedBox(height: 24),
-            _ActivitySection(),
-            SizedBox(height: 24),
-            _WorkoutsSection(),
-            SizedBox(height: 24),
-            _WeekTotalsCard(),
-          ],
-        ),
+      child: Column(
+        children: [
+          _TodayHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(24, 16, 24, 120),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _KcalCard(),
+                  SizedBox(height: 16),
+                  _StreakCard(),
+                  SizedBox(height: 24),
+                  _ActivitySection(),
+                  SizedBox(height: 24),
+                  _WorkoutsSection(),
+                  SizedBox(height: 24),
+                  _WeekTotalsCard(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -39,59 +44,62 @@ class _TodayHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // Avatar
-        CircleAvatar(
-          radius: 20,
-          backgroundColor: AppColors.surface,
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/avatar.png',
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-              errorBuilder: (_, _, _) => const Icon(
-                LucideIcons.user,
-                size: 20,
-                color: AppColors.textSecondary,
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: Row(
+        children: [
+          // Avatar
+          CircleAvatar(
+            radius: 20,
+            backgroundColor: AppColors.surface,
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/avatar.png',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => const Icon(
+                  LucideIcons.user,
+                  size: 20,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(width: 12),
-        // Greeting
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'TUESDAY · WEEK 18',
-              style: TextStyle(
-                fontSize: 11,
-                letterSpacing: 2.2,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w400,
-                color: AppColors.textSecondary,
+          const SizedBox(width: 12),
+          // Greeting
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'TUESDAY · WEEK 18',
+                style: TextStyle(
+                  fontSize: 11,
+                  letterSpacing: 2.2,
+                  fontFamily: AppFont.inter,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textSecondary,
+                ),
               ),
-            ),
-            Text(
-              'Morning, Mara.',
-              style: TextStyle(
-                fontSize: 17,
-                height: 1.29,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary,
-                fontFamily: AppFont.spaceGrotesk,
+              Text(
+                'Morning, Mara.',
+                style: TextStyle(
+                  fontSize: 17,
+                  height: 1.29,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPrimary,
+                  fontFamily: AppFont.spaceGrotesk,
+                ),
               ),
-            ),
-          ],
-        ),
-        const Spacer(),
-        // Icons
-        _iconButton(icon: LucideIcons.search),
-        const SizedBox(width: 8),
-        _iconButton(icon: LucideIcons.bell, showIndicator: true),
-      ],
+            ],
+          ),
+          const Spacer(),
+          // Icons
+          _iconButton(icon: LucideIcons.search),
+          const SizedBox(width: 8),
+          _iconButton(icon: LucideIcons.bell, showIndicator: true),
+        ],
+      ),
     );
   }
 
@@ -137,28 +145,23 @@ class _KcalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: AppColors.textPrimary,
-        borderRadius: BorderRadius.circular(32),
-      ),
+      padding: const EdgeInsets.only(top: 8, bottom: 32),
       child: Row(
         children: [
           // Left column
           Expanded(
+            flex: 2,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'TODAY · KCAL BURNED',
                   style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w400,
                     fontSize: 11,
                     letterSpacing: 2.2,
-                    height: 1.5,
+                    fontFamily: AppFont.inter,
+                    fontWeight: FontWeight.w400,
                     color: AppColors.textSecondary,
                   ),
                 ),
@@ -166,22 +169,21 @@ class _KcalCard extends StatelessWidget {
                 const Text(
                   '1,842',
                   style: TextStyle(
-                    fontFamily: AppFont.spaceGrotesk,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 76,
-                    height: 1.0,
+                    fontSize: 84,
                     letterSpacing: -3.8,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.accentOrange,
+                    fontFamily: AppFont.spaceGrotesk,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 11.59),
                 Row(
                   children: [
                     // Goal pill
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
+                        vertical: 6,
+                        horizontal: 9,
                       ),
                       decoration: BoxDecoration(
                         color: AppColors.textPrimary,
@@ -191,22 +193,20 @@ class _KcalCard extends StatelessWidget {
                       child: const Text(
                         'GOAL 2,400',
                         style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
                           fontSize: 11,
-                          height: 1.5,
-                          color: AppColors.textSecondary,
+                          fontFamily: AppFont.inter,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.background,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 7),
                     const Text(
                       '76% · 558 to go',
                       style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
                         fontSize: 12,
-                        height: 1.5,
+                        fontFamily: AppFont.inter,
+                        fontWeight: FontWeight.w400,
                         color: AppColors.textSecondary,
                       ),
                     ),
@@ -216,31 +216,30 @@ class _KcalCard extends StatelessWidget {
             ),
           ),
           // Donut chart
-          SizedBox(
-            width: 112,
-            height: 112,
+          Expanded(
+            flex: 1,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                SizedBox(
-                  width: 100,
-                  height: 100,
+                Expanded(
+                  // width: 100,
+                  // height: 100,
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 12,
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: AppColors.surface,
                     valueColor: const AlwaysStoppedAnimation(
                       AppColors.accentOrange,
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: 76,
-                  height: 76,
+                  // width: 76,
+                  // height: 76,
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 8,
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: AppColors.surface,
                     valueColor: const AlwaysStoppedAnimation(
                       AppColors.accentLime,
                     ),
@@ -252,7 +251,7 @@ class _KcalCard extends StatelessWidget {
                     Text(
                       'MOVE',
                       style: TextStyle(
-                        fontFamily: 'Inter',
+                        fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w400,
                         fontSize: 9,
                         letterSpacing: 1.6,
@@ -307,7 +306,7 @@ class _StreakCard extends StatelessWidget {
               const Text(
                 'STREAK',
                 style: TextStyle(
-                  fontFamily: 'Inter',
+                  fontFamily: AppFont.inter,
                   fontWeight: FontWeight.w400,
                   fontSize: 11,
                   letterSpacing: 2.2,
@@ -381,7 +380,7 @@ class _StreakCard extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontFamily: 'Inter',
+              fontFamily: AppFont.inter,
               fontWeight: FontWeight.w700,
               fontSize: 9,
               letterSpacing: 1.35,
@@ -514,7 +513,7 @@ class _ActivitySection extends StatelessWidget {
               Text(
                 label,
                 style: const TextStyle(
-                  fontFamily: 'Inter',
+                  fontFamily: AppFont.inter,
                   fontWeight: FontWeight.w400,
                   fontSize: 10,
                   letterSpacing: 1.8,
@@ -559,7 +558,7 @@ class _ActivitySection extends StatelessWidget {
             Text(
               badge,
               style: const TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w400,
                 fontSize: 11,
                 height: 1.5,
@@ -647,7 +646,7 @@ class _WorkoutsSection extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          fontFamily: 'Inter',
+          fontFamily: AppFont.inter,
           fontWeight: FontWeight.w600,
           fontSize: 12,
           color: active ? AppColors.white : AppColors.textPrimary,
@@ -694,7 +693,7 @@ class _WorkoutsSection extends StatelessWidget {
                     Text(
                       tag,
                       style: const TextStyle(
-                        fontFamily: 'Inter',
+                        fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w400,
                         fontSize: 10,
                         letterSpacing: 1.8,
@@ -706,7 +705,7 @@ class _WorkoutsSection extends StatelessWidget {
                       Text(
                         tagBadge,
                         style: const TextStyle(
-                          fontFamily: 'Inter',
+                          fontFamily: AppFont.inter,
                           fontWeight: FontWeight.w600,
                           fontSize: 10,
                           letterSpacing: 1.8,
@@ -732,7 +731,7 @@ class _WorkoutsSection extends StatelessWidget {
                     Text(
                       duration,
                       style: const TextStyle(
-                        fontFamily: 'Inter',
+                        fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w500,
                         fontSize: 12,
                         color: AppColors.textPrimary,
@@ -754,7 +753,7 @@ class _WorkoutsSection extends StatelessWidget {
                     Text(
                       calories,
                       style: const TextStyle(
-                        fontFamily: 'Inter',
+                        fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w500,
                         fontSize: 12,
                         color: AppColors.accentOrange,
@@ -828,7 +827,7 @@ class _WeekTotalsCard extends StatelessWidget {
               const Text(
                 'Mon — Sun',
                 style: TextStyle(
-                  fontFamily: 'Inter',
+                  fontFamily: AppFont.inter,
                   fontWeight: FontWeight.w400,
                   fontSize: 11,
                   height: 1.5,
@@ -873,7 +872,7 @@ class _WeekTotalsCard extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: AppFont.inter,
             fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 0.5,
@@ -930,7 +929,7 @@ class _WeekTotalsCard extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: AppFont.inter,
             fontWeight: FontWeight.w700,
             fontSize: 9,
             letterSpacing: 1.35,

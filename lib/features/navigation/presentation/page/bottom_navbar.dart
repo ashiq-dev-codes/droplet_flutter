@@ -4,6 +4,7 @@ import 'package:droplet_flutter/features/timer/presentation/widgets/workout_time
 import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
 import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -133,7 +134,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         _labels[i],
                         style: const TextStyle(
                           fontSize: 12,
-                          fontFamily: 'Inter',
+                          fontFamily: AppFont.inter,
                           color: AppColors.primary,
                           fontWeight: FontWeight.w600,
                         ),

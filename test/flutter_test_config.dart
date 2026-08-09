@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/services.dart';
 
 /// Load the real app fonts so text metrics match the device render.
@@ -9,7 +10,7 @@ import 'package:flutter/services.dart';
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   for (final entry in <(String, String)>[
     ('Space Grotesk', 'assets/fonts/SpaceGrotesk-Variable.ttf'),
-    ('Inter', 'assets/fonts/Inter-Variable.ttf'),
+    (AppFont.inter, 'assets/fonts/Inter-Variable.ttf'),
   ]) {
     final (family, path) = entry;
     final bytes = File(path).readAsBytesSync();

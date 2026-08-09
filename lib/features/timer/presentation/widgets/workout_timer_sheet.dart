@@ -105,7 +105,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
             const Text(
               'Set a timer for your next workout session.',
               style: TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: AppFont.inter,
                 fontSize: 13,
                 height: 1.4,
                 color: AppColors.textSecondary,
@@ -171,7 +171,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
             Text(
               'WORKOUT TIMER',
               style: TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: AppFont.inter,
                 fontSize: 10,
                 letterSpacing: 2.2,
                 color: AppColors.textSecondary,
@@ -242,7 +242,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
                   Text(
                     _statusText,
                     style: TextStyle(
-                      fontFamily: 'Inter',
+                      fontFamily: AppFont.inter,
                       fontSize: 11,
                       letterSpacing: 2.2,
                       color: _statusColor,
@@ -266,7 +266,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
               Text(
                 _hintText,
                 style: const TextStyle(
-                  fontFamily: 'Inter',
+                  fontFamily: AppFont.inter,
                   fontSize: 10,
                   letterSpacing: 2.2,
                   color: AppColors.textSecondary,
@@ -409,7 +409,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
               Text(
                 label,
                 style: const TextStyle(
-                  fontFamily: 'Inter',
+                  fontFamily: AppFont.inter,
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
                   color: AppColors.textPrimary,

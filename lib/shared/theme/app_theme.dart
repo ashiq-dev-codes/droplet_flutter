@@ -5,7 +5,7 @@ import 'app_colors.dart';
 
 /// Central Flutter theme matching the Figma fitness tracker design.
 class AppTheme {
-  // static const String AppFont.inter = 'Inter';
+  // static const String AppFont.inter = AppFont.inter;
   // static const String displayFont = 'Space Grotesk';
 
   static ThemeData get light {

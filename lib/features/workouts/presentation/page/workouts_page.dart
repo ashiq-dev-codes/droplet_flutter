@@ -150,7 +150,7 @@ class _ResumeCard extends StatelessWidget {
                 const Text(
                   'RESUME LAST',
                   style: TextStyle(
-                    fontFamily: 'Inter',
+                    fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w700,
                     fontSize: 10,
                     letterSpacing: 2.0,
@@ -214,7 +214,7 @@ class _ResumeCard extends StatelessWidget {
                       Text(
                         'START NOW',
                         style: TextStyle(
-                          fontFamily: 'Inter',
+                          fontFamily: AppFont.inter,
                           fontWeight: FontWeight.w700,
                           fontSize: 12,
                           color: AppColors.textPrimary,
@@ -302,7 +302,7 @@ class _RecommendedSection extends StatelessWidget {
                     Text(
                       subs[i],
                       style: const TextStyle(
-                        fontFamily: 'Inter',
+                        fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                         color: AppColors.textSecondary,
@@ -361,7 +361,7 @@ class _RecommendedSection extends StatelessWidget {
       child: Text(
         label,
         style: const TextStyle(
-          fontFamily: 'Inter',
+          fontFamily: AppFont.inter,
           fontWeight: FontWeight.w600,
           fontSize: 10,
           color: AppColors.white,
@@ -508,7 +508,7 @@ class _FavoritesSection extends StatelessWidget {
                 Text(
                   subtitle,
                   style: const TextStyle(
-                    fontFamily: 'Inter',
+                    fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
                     color: AppColors.textSecondary,

@@ -55,7 +55,7 @@ class ProfilePage extends StatelessWidget {
             Text(
               'PULSE V4.7.2',
               style: TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w400,
                 fontSize: 10,
                 letterSpacing: 1.0,
@@ -132,7 +132,7 @@ class _ProfileHeader extends StatelessWidget {
         const Text(
           'mara.jensen@pulse.app',
           style: TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: AppFont.inter,
             fontWeight: FontWeight.w400,
             fontSize: 14,
             color: AppColors.textSecondary,
@@ -148,7 +148,7 @@ class _ProfileHeader extends StatelessWidget {
           child: const Text(
             'PREMIUM MEMBER',
             style: TextStyle(
-              fontFamily: 'Inter',
+              fontFamily: AppFont.inter,
               fontWeight: FontWeight.w700,
               fontSize: 10,
               letterSpacing: 0.5,
@@ -200,7 +200,7 @@ class _Stat extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: AppFont.inter,
             fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 1.8,
@@ -268,7 +268,7 @@ class _MenuSection extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                fontFamily: 'Inter',
+                fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w700,
                 fontSize: 10,
                 letterSpacing: 2.0,
@@ -386,7 +386,7 @@ class _OnBadge extends StatelessWidget {
       child: const Text(
         'ON',
         style: TextStyle(
-          fontFamily: 'Inter',
+          fontFamily: AppFont.inter,
           fontWeight: FontWeight.w700,
           fontSize: 10,
           color: AppColors.textPrimary,

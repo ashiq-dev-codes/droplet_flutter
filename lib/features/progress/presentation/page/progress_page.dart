@@ -133,7 +133,7 @@ class _StatsRow extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: AppFont.inter,
             fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 1.8,
@@ -172,7 +172,7 @@ class _StatsRow extends StatelessWidget {
         Text(
           badge,
           style: TextStyle(
-            fontFamily: 'Inter',
+            fontFamily: AppFont.inter,
             fontWeight: FontWeight.w700,
             fontSize: 9,
             color: badgeColor ?? AppColors.textSecondary,
@@ -224,7 +224,7 @@ class _ActivityVolumeChart extends StatelessWidget {
                   const Text(
                     'Daily burn comparison',
                     style: TextStyle(
-                      fontFamily: 'Inter',
+                      fontFamily: AppFont.inter,
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
                       color: AppColors.textSecondary,
@@ -260,7 +260,7 @@ class _ActivityVolumeChart extends StatelessWidget {
                       Text(
                         _days[i],
                         style: TextStyle(
-                          fontFamily: 'Inter',
+                          fontFamily: AppFont.inter,
                           fontWeight: FontWeight.w700,
                           fontSize: 9,
                           color: isActive
@@ -359,7 +359,7 @@ class _PersonalRecords extends StatelessWidget {
                 Text(
                   date,
                   style: const TextStyle(
-                    fontFamily: 'Inter',
+                    fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
                     color: AppColors.textSecondary,
@@ -384,7 +384,7 @@ class _PersonalRecords extends StatelessWidget {
                 Text(
                   badge,
                   style: const TextStyle(
-                    fontFamily: 'Inter',
+                    fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w700,
                     fontSize: 10,
                     color: AppColors.accentLime,

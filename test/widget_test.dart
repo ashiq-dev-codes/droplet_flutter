@@ -3,6 +3,7 @@ import 'package:droplet_flutter/features/profile/presentation/page/profile_page.
 import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
 import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
 import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -25,21 +26,25 @@ void main() {
 
         await tester.pumpWidget(
           MaterialApp(
-            theme: ThemeData(fontFamily: 'Inter'),
+            theme: ThemeData(fontFamily: AppFont.inter),
             home: Scaffold(body: page),
           ),
         );
         await tester.pump();
 
-        expect(tester.takeException(), isNull,
-            reason: '${page.runtimeType} should render without exceptions');
+        expect(
+          tester.takeException(),
+          isNull,
+          reason: '${page.runtimeType} should render without exceptions',
+        );
       });
     }
   });
 
   // ── Switching every tab never throws ───────────────────────────
-  testWidgets('bottom nav switches all 5 tabs without exceptions',
-      (tester) async {
+  testWidgets('bottom nav switches all 5 tabs without exceptions', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(_size);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
@@ -63,8 +68,11 @@ void main() {
       await tester.tap(finder, warnIfMissed: false);
       await tester.pumpAndSettle(const Duration(milliseconds: 300));
 
-      expect(tester.takeException(), isNull,
-          reason: 'no exceptions after switching tabs');
+      expect(
+        tester.takeException(),
+        isNull,
+        reason: 'no exceptions after switching tabs',
+      );
     }
   });
 }

@@ -1,4 +1,5 @@
 import 'package:droplet_flutter/features/navigation/presentation/page/bottom_navbar.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -10,7 +11,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        theme: ThemeData(fontFamily: 'Inter'),
+        theme: ThemeData(fontFamily: AppFont.inter),
         home: const Scaffold(
           extendBody: true,
           body: SizedBox.expand(),
