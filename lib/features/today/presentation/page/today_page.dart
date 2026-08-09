@@ -150,7 +150,6 @@ class _KcalCard extends StatelessWidget {
         children: [
           // Left column
           Expanded(
-            flex: 2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,32 +215,34 @@ class _KcalCard extends StatelessWidget {
             ),
           ),
           // Donut chart
-          Expanded(
-            flex: 1,
+          SizedBox(
+            width: 131,
+            height: 131,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Expanded(
-                  // width: 100,
-                  // height: 100,
+                SizedBox.expand(
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 12,
+                    strokeCap: StrokeCap.round,
                     backgroundColor: AppColors.surface,
                     valueColor: const AlwaysStoppedAnimation(
                       AppColors.accentOrange,
                     ),
                   ),
                 ),
-                SizedBox(
-                  // width: 76,
-                  // height: 76,
-                  child: CircularProgressIndicator(
-                    value: 0.78,
-                    strokeWidth: 8,
-                    backgroundColor: AppColors.surface,
-                    valueColor: const AlwaysStoppedAnimation(
-                      AppColors.accentLime,
+                Padding(
+                  padding: const EdgeInsets.all(17),
+                  child: SizedBox.expand(
+                    child: CircularProgressIndicator(
+                      value: 0.78,
+                      strokeWidth: 8,
+                      strokeCap: StrokeCap.round,
+                      backgroundColor: AppColors.surface,
+                      valueColor: const AlwaysStoppedAnimation(
+                        AppColors.accentLime,
+                      ),
                     ),
                   ),
                 ),
@@ -251,21 +252,19 @@ class _KcalCard extends StatelessWidget {
                     Text(
                       'MOVE',
                       style: TextStyle(
+                        fontSize: 9,
                         fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w400,
-                        fontSize: 9,
-                        letterSpacing: 1.6,
                         color: AppColors.textSecondary,
                       ),
                     ),
                     Text(
                       '78%',
                       style: TextStyle(
-                        fontFamily: AppFont.spaceGrotesk,
-                        fontWeight: FontWeight.w700,
                         fontSize: 22,
-                        height: 1,
-                        color: AppColors.white,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                        fontFamily: AppFont.spaceGrotesk,
                       ),
                     ),
                   ],
