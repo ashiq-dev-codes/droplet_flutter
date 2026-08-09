@@ -1,5 +1,6 @@
 import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
 import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
+import 'package:droplet_flutter/features/timer/presentation/widgets/workout_timer_sheet.dart';
 import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
 import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
@@ -58,6 +59,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
+  void _openTimerSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: AppColors.background,
+      barrierColor: AppColors.shadowDark,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+      ),
+      builder: (_) => const WorkoutTimerSheet(),
+    );
+  }
+
   Widget _buildNavBar() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -79,7 +93,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     final showPill = active || isCenter;
 
     return InkWell(
-      onTap: () => setState(() => _index = i),
+      onTap: () => isCenter ? _openTimerSheet() : setState(() => _index = i),
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: AnimatedContainer(
