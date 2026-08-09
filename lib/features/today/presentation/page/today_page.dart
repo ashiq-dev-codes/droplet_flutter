@@ -285,108 +285,297 @@ class _StreakCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
         color: AppColors.textPrimary,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header row
-          Row(
-            children: [
-              const Icon(
-                LucideIcons.flame,
-                size: 16,
-                color: AppColors.accentOrange,
-              ),
-              const SizedBox(width: 6),
-              const Text(
-                'STREAK',
-                style: TextStyle(
-                  fontFamily: AppFont.inter,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 11,
-                  letterSpacing: 2.2,
-                  height: 1.5,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                const Icon(
+                  LucideIcons.flame,
+                  size: 16,
                   color: AppColors.accentLime,
                 ),
-              ),
-              const Spacer(),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  const Text(
-                    '17',
-                    style: TextStyle(
-                      fontFamily: AppFont.spaceGrotesk,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: AppColors.accentLime,
-                    ),
+                const SizedBox(width: 8),
+                const Text(
+                  'STREAK',
+                  style: TextStyle(
+                    fontSize: 11,
+                    letterSpacing: 2.2,
+                    fontFamily: AppFont.inter,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.borderLight,
                   ),
-                  const SizedBox(width: 4),
-                  const Text(
-                    'days',
-                    style: TextStyle(
-                      fontFamily: AppFont.spaceGrotesk,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 13,
-                      color: AppColors.textSecondary,
+                ),
+                const Spacer(),
+                Row(
+                  textBaseline: TextBaseline.alphabetic,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: [
+                    const Text(
+                      '17',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.accentLime,
+                        fontFamily: AppFont.spaceGrotesk,
+                      ),
                     ),
+                    const Text(
+                      'days',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.borderLight,
+                        fontFamily: AppFont.spaceGrotesk,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 6.5),
+          // Bar chart
+          SizedBox(
+            height: 60,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  // ── Week 1 (past) ────────────
+                  _bar(
+                    label: 'M',
+                    height: 28,
+                    barColor: AppColors.background,
+                    labelColor: AppColors.background.withValues(alpha: 0.5),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background,
+                    labelColor: AppColors.background.withValues(alpha: 0.5),
+                  ),
+                  _bar(
+                    label: 'W',
+                    height: 14,
+                    barColor: AppColors.background,
+                    labelColor: AppColors.background.withValues(alpha: 0.5),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background,
+                    labelColor: AppColors.background.withValues(alpha: 0.5),
+                  ),
+                  _bar(
+                    label: 'F',
+                    height: 28,
+                    barColor: AppColors.background,
+                    labelColor: AppColors.background.withValues(alpha: 0.5),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 28,
+                    barColor: AppColors.background,
+                    labelColor: AppColors.background.withValues(alpha: 0.5),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 36,
+                    barColor: AppColors.accentLime,
+                    labelColor: AppColors.accentLime,
+                  ),
+                  _weekDivider(),
+                  // ── Week 2 (current) ─────────
+                  _bar(
+                    label: 'M',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'W',
+                    height: 14,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'F',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 36,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _weekDivider(),
+                  // ── Week 3 ────────────────────
+                  _bar(
+                    label: 'M',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'W',
+                    height: 14,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'F',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 36,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _weekDivider(),
+                  // ── Week 4 ────────────────────
+                  _bar(
+                    label: 'M',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'W',
+                    height: 14,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'T',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'F',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 28,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
+                  ),
+                  _bar(
+                    label: 'S',
+                    height: 36,
+                    barColor: AppColors.background.withValues(alpha: 0.2),
+                    labelColor: AppColors.background.withValues(alpha: 0.3),
                   ),
                 ],
               ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          // Bar chart
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              _bar('M', 28, true),
-              _bar('T', 28, true),
-              _bar('W', 14, false),
-              _bar('T', 28, true),
-              _bar('F', 28, true),
-              _bar('S', 28, true),
-              _bar('S', 36, true),
-              _bar('M', 28, true),
-              _bar('T', 28, true),
-            ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _bar(String label, double height, bool filled) {
-    return Expanded(
+  Widget _bar({
+    required String label,
+    required double height,
+    required Color barColor,
+    required Color labelColor,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 11),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: height,
             width: 6,
-            margin: const EdgeInsets.only(bottom: 6),
+            height: height > 0 ? height : 4,
+            margin: const EdgeInsets.only(bottom: 8),
             decoration: BoxDecoration(
-              color: filled ? AppColors.accentLime : AppColors.primary,
-              borderRadius: BorderRadius.circular(3),
+              color: barColor,
+              borderRadius: BorderRadius.circular(111),
             ),
           ),
           Text(
             label,
             style: TextStyle(
-              fontFamily: AppFont.inter,
-              fontWeight: FontWeight.w700,
               fontSize: 9,
-              letterSpacing: 1.35,
-              color: filled ? AppColors.textSecondary : AppColors.primary,
+              color: labelColor,
+              fontFamily: AppFont.inter,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _weekDivider() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 11),
+      child: Container(
+        width: 1,
+        height: 28,
+        color: AppColors.borderLight.withValues(alpha: 0.15),
       ),
     );
   }
