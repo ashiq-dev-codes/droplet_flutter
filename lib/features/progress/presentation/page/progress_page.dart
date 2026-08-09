@@ -24,7 +24,7 @@ class ProgressPage extends StatelessWidget {
                 fontSize: 30,
                 height: 1.2,
                 letterSpacing: -0.75,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
             SizedBox(height: 16),
@@ -71,7 +71,7 @@ class _FilterTabs extends StatelessWidget {
                 boxShadow: active
                     ? [
                         BoxShadow(
-                          color: AppColors.ink.withValues(alpha: 0.08),
+                          color: AppColors.textPrimary.withValues(alpha: 0.08),
                           blurRadius: 4,
                           offset: const Offset(0, 1),
                         ),
@@ -84,7 +84,7 @@ class _FilterTabs extends StatelessWidget {
                   fontFamily: AppTheme.bodyFont,
                   fontWeight: active ? FontWeight.w700 : FontWeight.w400,
                   fontSize: 12,
-                  color: active ? AppColors.ink : AppColors.inkSoft,
+                  color: active ? AppColors.textPrimary : AppColors.textSecondary,
                 ),
               ),
             ),
@@ -129,7 +129,7 @@ class _StatsRow extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 1.8,
-            color: AppColors.inkSoft,
+            color: AppColors.textSecondary,
           ),
         ),
         const SizedBox(height: 6),
@@ -145,7 +145,7 @@ class _StatsRow extends StatelessWidget {
                 fontSize: 26,
                 height: 1,
                 letterSpacing: -1.3,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
             if (unit != null)
@@ -155,7 +155,7 @@ class _StatsRow extends StatelessWidget {
                   fontFamily: AppTheme.displayFont,
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
-                  color: AppColors.inkSoft,
+                  color: AppColors.textSecondary,
                 ),
               ),
           ],
@@ -167,7 +167,7 @@ class _StatsRow extends StatelessWidget {
             fontFamily: 'Inter',
             fontWeight: FontWeight.w700,
             fontSize: 9,
-            color: badgeColor ?? AppColors.inkSoft,
+            color: badgeColor ?? AppColors.textSecondary,
           ),
         ),
       ],
@@ -178,7 +178,7 @@ class _StatsRow extends StatelessWidget {
     return Container(
       width: 1,
       height: 40,
-      color: AppColors.surfaceBorder,
+      color: AppColors.divider,
     );
   }
 }
@@ -213,7 +213,7 @@ class _ActivityVolumeChart extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
                       height: 1.55,
-                      color: AppColors.ink,
+                      color: AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -223,12 +223,12 @@ class _ActivityVolumeChart extends StatelessWidget {
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w400,
                       fontSize: 12,
-                      color: AppColors.inkSoft,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                 ],
               ),
-              Icon(LucideIcons.info, size: 16, color: AppColors.inkSoft),
+              Icon(LucideIcons.info, size: 16, color: AppColors.textSecondary),
             ],
           ),
           const SizedBox(height: 20),
@@ -248,7 +248,7 @@ class _ActivityVolumeChart extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isActive
                               ? AppColors.accentLime
-                              : AppColors.surfaceBorder,
+                              : AppColors.divider,
                           borderRadius: BorderRadius.circular(6),
                         ),
                       ),
@@ -259,7 +259,7 @@ class _ActivityVolumeChart extends StatelessWidget {
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w700,
                           fontSize: 9,
-                          color: isActive ? AppColors.ink : AppColors.inkSoft,
+                          color: isActive ? AppColors.textPrimary : AppColors.textSecondary,
                         ),
                       ),
                     ],
@@ -289,7 +289,7 @@ class _PersonalRecords extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontSize: 18,
             height: 1.55,
-            color: AppColors.ink,
+            color: AppColors.textPrimary,
           ),
         ),
         const SizedBox(height: 12),
@@ -334,7 +334,7 @@ class _PersonalRecords extends StatelessWidget {
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, size: 20, color: AppColors.ink),
+            child: Icon(icon, size: 20, color: AppColors.textPrimary),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -347,7 +347,7 @@ class _PersonalRecords extends StatelessWidget {
                     fontFamily: AppTheme.displayFont,
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
-                    color: AppColors.ink,
+                    color: AppColors.textPrimary,
                   ),
                 ),
                 Text(
@@ -356,7 +356,7 @@ class _PersonalRecords extends StatelessWidget {
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
-                    color: AppColors.inkSoft,
+                    color: AppColors.textSecondary,
                   ),
                 ),
               ],
@@ -371,7 +371,7 @@ class _PersonalRecords extends StatelessWidget {
                   fontFamily: AppTheme.displayFont,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
-                  color: AppColors.ink,
+                  color: AppColors.textPrimary,
                 ),
               ),
               if (badge != null)

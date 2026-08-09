@@ -43,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 fontSize: 10,
                 letterSpacing: 1.0,
-                color: AppColors.inkSoft,
+                color: AppColors.textSecondary,
               ),
             ),
           ],
@@ -76,7 +76,7 @@ class _ProfileHeader extends StatelessWidget {
                   errorBuilder: (_, _, _) => const Icon(
                     LucideIcons.user,
                     size: 40,
-                    color: AppColors.inkSoft,
+                    color: AppColors.textSecondary,
                   ),
                 ),
               ),
@@ -92,7 +92,7 @@ class _ProfileHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.white, width: 3),
                 ),
-                child: const Icon(LucideIcons.camera, size: 14, color: AppColors.ink),
+                child: const Icon(LucideIcons.camera, size: 14, color: AppColors.textPrimary),
               ),
             ),
           ],
@@ -105,7 +105,7 @@ class _ProfileHeader extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontSize: 24,
             height: 1.33,
-            color: AppColors.ink,
+            color: AppColors.textPrimary,
           ),
         ),
         const SizedBox(height: 4),
@@ -115,7 +115,7 @@ class _ProfileHeader extends StatelessWidget {
             fontFamily: 'Inter',
             fontWeight: FontWeight.w400,
             fontSize: 14,
-            color: AppColors.inkSoft,
+            color: AppColors.textSecondary,
           ),
         ),
         const SizedBox(height: 8),
@@ -132,7 +132,7 @@ class _ProfileHeader extends StatelessWidget {
               fontWeight: FontWeight.w700,
               fontSize: 10,
               letterSpacing: 0.5,
-              color: AppColors.ink,
+              color: AppColors.textPrimary,
             ),
           ),
         ),
@@ -184,7 +184,7 @@ class _Stat extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 1.8,
-            color: AppColors.inkSoft,
+            color: AppColors.textSecondary,
           ),
         ),
         const SizedBox(height: 4),
@@ -198,7 +198,7 @@ class _Stat extends StatelessWidget {
                 fontFamily: AppTheme.displayFont,
                 fontWeight: FontWeight.w700,
                 fontSize: 22,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
             if (unit != null)
@@ -208,7 +208,7 @@ class _Stat extends StatelessWidget {
                   fontFamily: AppTheme.displayFont,
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
-                  color: AppColors.inkSoft,
+                  color: AppColors.textSecondary,
                 ),
               ),
           ],
@@ -226,7 +226,7 @@ class _Divider extends StatelessWidget {
     return Container(
       width: 1,
       height: 32,
-      color: AppColors.surfaceBorder,
+      color: AppColors.divider,
     );
   }
 }
@@ -256,7 +256,7 @@ class _MenuSection extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 fontSize: 10,
                 letterSpacing: 2.0,
-                color: AppColors.inkSoft,
+                color: AppColors.textSecondary,
               ),
             ),
           ),
@@ -276,7 +276,7 @@ class _MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isDestructive ? AppColors.accentOrange : AppColors.ink;
+    final color = isDestructive ? AppColors.accentOrange : AppColors.textPrimary;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Row(
@@ -302,7 +302,7 @@ class _MenuItem extends StatelessWidget {
               ),
             ),
           ),
-          Icon(LucideIcons.chevronRight, size: 16, color: AppColors.inkSoft),
+          Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textSecondary),
         ],
       ),
     );
@@ -329,7 +329,7 @@ class _MenuItemWithTrailing extends StatelessWidget {
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, size: 18, color: AppColors.ink),
+            child: Icon(icon, size: 18, color: AppColors.textPrimary),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -339,7 +339,7 @@ class _MenuItemWithTrailing extends StatelessWidget {
                 fontFamily: AppTheme.bodyFont,
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
           ),
@@ -367,7 +367,7 @@ class _OnBadge extends StatelessWidget {
           fontFamily: 'Inter',
           fontWeight: FontWeight.w700,
           fontSize: 10,
-          color: AppColors.ink,
+          color: AppColors.textPrimary,
         ),
       ),
     );
@@ -382,9 +382,9 @@ class _DeviceIcons extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(LucideIcons.watch, size: 16, color: AppColors.ink),
+        Icon(LucideIcons.watch, size: 16, color: AppColors.textPrimary),
         const SizedBox(width: 4),
-        Icon(LucideIcons.watch, size: 16, color: AppColors.ink),
+        Icon(LucideIcons.watch, size: 16, color: AppColors.textPrimary),
       ],
     );
   }

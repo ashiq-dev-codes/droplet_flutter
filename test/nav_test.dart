@@ -23,8 +23,8 @@ void main() {
     final icons = <IconData>[
       LucideIcons.house,
       LucideIcons.dumbbell,
+      LucideIcons.plus,
       LucideIcons.chartNoAxesColumn,
-      LucideIcons.heart,
       LucideIcons.user,
     ];
 

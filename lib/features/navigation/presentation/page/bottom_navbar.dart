@@ -1,7 +1,8 @@
+import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
+import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
 import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
 import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
-import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
-import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
+import 'package:droplet_flutter/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -19,98 +20,114 @@ class _BottomNavBarState extends State<BottomNavBar> {
   static const _pages = <Widget>[
     TodayPage(),
     WorkoutsPage(),
+    TodayPage(), // Center action placeholder
     ProgressPage(),
-    TodayPage(), // History placeholder — not in the Figma design set
     ProfilePage(),
   ];
 
   static const _icons = <IconData>[
     LucideIcons.house,
     LucideIcons.dumbbell,
+    LucideIcons.plus,
     LucideIcons.chartNoAxesColumn,
-    LucideIcons.heart,
     LucideIcons.user,
   ];
 
   static const _labels = <String>[
     'Today',
     'Workouts',
+    '',
     'Progress',
-    'History',
     'Profile',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _index,
-        children: _pages,
+      body: Stack(
+        children: [
+          IndexedStack(index: _index, children: _pages),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SafeArea(top: false, child: _buildNavBar()),
+          ),
+        ],
       ),
-      extendBody: true,
-      bottomNavigationBar: _buildNavBar(),
     );
   }
 
   Widget _buildNavBar() {
-    return SafeArea(
-      top: false,
-      child: Center(
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-          decoration: BoxDecoration(
-            color: const Color(0xFF0E0F0C),
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(5, (i) => _buildTab(i)),
-          ),
-        ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 6),
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(111),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(5, (i) => _buildTab(i)),
       ),
     );
   }
 
   Widget _buildTab(int i) {
+    final isCenter = i == 2;
     final active = _index == i;
-    return GestureDetector(
+    final showPill = active || isCenter;
+
+    return InkWell(
       onTap: () => setState(() => _index = i),
-      behavior: HitTestBehavior.opaque,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOut,
         height: 44,
-        padding: active
-            ? const EdgeInsets.symmetric(horizontal: 14)
-            : EdgeInsets.zero,
-        decoration: active
-            ? BoxDecoration(
-                color: const Color(0xFFF4F2EC),
-                borderRadius: BorderRadius.circular(50),
-              )
-            : null,
+        curve: Curves.easeInOut,
+        duration: const Duration(milliseconds: 200),
+        padding: showPill
+            ? const EdgeInsets.symmetric(horizontal: 16)
+            : const EdgeInsets.symmetric(horizontal: 13),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: showPill
+              ? (isCenter ? AppColors.background : AppColors.accentLime)
+              : Colors.transparent,
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               _icons[i],
               size: 18,
-              color: active ? const Color(0xFF0E0F0C) : const Color(0xFF8A8A82),
+              color: isCenter || active
+                  ? AppColors.primary
+                  : AppColors.textSecondary,
             ),
-            if (active) ...[
-              const SizedBox(width: 6),
-              Text(
-                _labels[i],
-                style: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                  height: 1,
-                  color: Color(0xFF0E0F0C),
+            if (_labels[i].isNotEmpty)
+              AnimatedSize(
+                curve: Curves.easeInOut,
+                duration: const Duration(milliseconds: 250),
+                child: SizedBox(
+                  width: active ? null : 0,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(width: 6),
+                      Text(
+                        _labels[i],
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontFamily: 'Inter',
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
           ],
         ),
       ),

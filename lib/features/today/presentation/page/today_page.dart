@@ -54,7 +54,7 @@ class _TodayHeader extends StatelessWidget {
               errorBuilder: (_, _, _) => const Icon(
                 LucideIcons.user,
                 size: 20,
-                color: AppColors.inkSoft,
+                color: AppColors.textSecondary,
               ),
             ),
           ),
@@ -72,7 +72,7 @@ class _TodayHeader extends StatelessWidget {
                 fontSize: 11,
                 letterSpacing: 2.2,
                 height: 1,
-                color: AppColors.inkSoft,
+                color: AppColors.textSecondary,
               ),
             ),
             SizedBox(height: 4),
@@ -83,7 +83,7 @@ class _TodayHeader extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 fontSize: 17,
                 height: 1.29,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
           ],
@@ -105,7 +105,7 @@ class _TodayHeader extends StatelessWidget {
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Icon(icon, size: 18, color: AppColors.ink),
+      child: Icon(icon, size: 18, color: AppColors.textPrimary),
     );
   }
 }
@@ -120,7 +120,7 @@ class _KcalCard extends StatelessWidget {
       height: 150,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: AppColors.ink,
+        color: AppColors.textPrimary,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Row(
@@ -139,7 +139,7 @@ class _KcalCard extends StatelessWidget {
                     fontSize: 11,
                     letterSpacing: 2.2,
                     height: 1.5,
-                    color: AppColors.inkSoft,
+                    color: AppColors.textSecondary,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -162,10 +162,10 @@ class _KcalCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.ink,
+                        color: AppColors.textPrimary,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                            color: const Color(0xFF2A2C28), width: 1),
+                            color: AppColors.primary, width: 1),
                       ),
                       child: const Text(
                         'GOAL 2,400',
@@ -174,7 +174,7 @@ class _KcalCard extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontSize: 11,
                           height: 1.5,
-                          color: AppColors.inkSoft,
+                          color: AppColors.textSecondary,
                         ),
                       ),
                     ),
@@ -186,7 +186,7 @@ class _KcalCard extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
                         height: 1.5,
-                        color: AppColors.inkSoft,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                   ],
@@ -207,7 +207,7 @@ class _KcalCard extends StatelessWidget {
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 12,
-                    backgroundColor: const Color(0xFF2A2C28),
+                    backgroundColor: AppColors.primary,
                     valueColor: const AlwaysStoppedAnimation(
                         AppColors.accentOrange),
                   ),
@@ -218,7 +218,7 @@ class _KcalCard extends StatelessWidget {
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 8,
-                    backgroundColor: const Color(0xFF2A2C28),
+                    backgroundColor: AppColors.primary,
                     valueColor: const AlwaysStoppedAnimation(
                         AppColors.accentLime),
                   ),
@@ -233,7 +233,7 @@ class _KcalCard extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontSize: 9,
                         letterSpacing: 1.6,
-                        color: AppColors.inkSoft,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                     Text(
@@ -266,7 +266,7 @@ class _StreakCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
       decoration: BoxDecoration(
-        color: AppColors.ink,
+        color: AppColors.textPrimary,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
@@ -309,7 +309,7 @@ class _StreakCard extends StatelessWidget {
                       fontFamily: AppTheme.displayFont,
                       fontWeight: FontWeight.w700,
                       fontSize: 13,
-                      color: AppColors.inkSoft,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                 ],
@@ -347,7 +347,7 @@ class _StreakCard extends StatelessWidget {
             width: 6,
             margin: const EdgeInsets.only(bottom: 6),
             decoration: BoxDecoration(
-              color: filled ? AppColors.accentLime : const Color(0xFF2A2C28),
+              color: filled ? AppColors.accentLime : AppColors.primary,
               borderRadius: BorderRadius.circular(3),
             ),
           ),
@@ -358,7 +358,7 @@ class _StreakCard extends StatelessWidget {
               fontWeight: FontWeight.w700,
               fontSize: 9,
               letterSpacing: 1.35,
-              color: filled ? AppColors.inkSoft : const Color(0xFF2A2C28),
+              color: filled ? AppColors.textSecondary : AppColors.primary,
             ),
           ),
         ],
@@ -386,7 +386,7 @@ class _ActivitySection extends StatelessWidget {
                 fontFamily: AppTheme.displayFont,
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
             Row(
@@ -397,11 +397,11 @@ class _ActivitySection extends StatelessWidget {
                     fontFamily: AppTheme.bodyFont,
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
-                    color: AppColors.ink,
+                    color: AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(width: 4),
-                Icon(LucideIcons.chevronRight, size: 14, color: AppColors.ink),
+                Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textPrimary),
               ],
             ),
           ],
@@ -440,7 +440,7 @@ class _ActivitySection extends StatelessWidget {
           // Icon + label
           Row(
             children: [
-              Icon(icon, size: 16, color: AppColors.inkSoft),
+              Icon(icon, size: 16, color: AppColors.textSecondary),
               const SizedBox(width: 6),
               Text(
                 label,
@@ -449,7 +449,7 @@ class _ActivitySection extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 10,
                   letterSpacing: 1.8,
-                  color: AppColors.inkSoft,
+                  color: AppColors.textSecondary,
                 ),
               ),
             ],
@@ -468,7 +468,7 @@ class _ActivitySection extends StatelessWidget {
                   fontSize: 34,
                   height: 1,
                   letterSpacing: -1.7,
-                  color: AppColors.ink,
+                  color: AppColors.textPrimary,
                 ),
               ),
               if (unit != null) ...[
@@ -479,7 +479,7 @@ class _ActivitySection extends StatelessWidget {
                     fontFamily: AppTheme.displayFont,
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
-                    color: AppColors.inkSoft,
+                    color: AppColors.textSecondary,
                   ),
                 ),
               ],
@@ -494,7 +494,7 @@ class _ActivitySection extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 fontSize: 11,
                 height: 1.5,
-                color: AppColors.inkSoft,
+                color: AppColors.textSecondary,
               ),
             ),
           ],
@@ -522,7 +522,7 @@ class _WorkoutsSection extends StatelessWidget {
                 fontFamily: AppTheme.displayFont,
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
             Row(
@@ -572,7 +572,7 @@ class _WorkoutsSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
       decoration: BoxDecoration(
-        color: active ? AppColors.ink : AppColors.surface,
+        color: active ? AppColors.textPrimary : AppColors.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
@@ -581,7 +581,7 @@ class _WorkoutsSection extends StatelessWidget {
           fontFamily: 'Inter',
           fontWeight: FontWeight.w600,
           fontSize: 12,
-          color: active ? AppColors.white : AppColors.ink,
+          color: active ? AppColors.white : AppColors.textPrimary,
         ),
       ),
     );
@@ -612,7 +612,7 @@ class _WorkoutsSection extends StatelessWidget {
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(icon, size: 28, color: AppColors.ink),
+            child: Icon(icon, size: 28, color: AppColors.textPrimary),
           ),
           const SizedBox(width: 12),
           // Info
@@ -629,7 +629,7 @@ class _WorkoutsSection extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontSize: 10,
                         letterSpacing: 1.8,
-                        color: AppColors.inkSoft,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                     if (tagBadge != null) ...[
@@ -654,7 +654,7 @@ class _WorkoutsSection extends StatelessWidget {
                     fontFamily: AppTheme.displayFont,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
-                    color: AppColors.ink,
+                    color: AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -665,19 +665,19 @@ class _WorkoutsSection extends StatelessWidget {
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
-                            color: AppColors.ink)),
+                            color: AppColors.textPrimary)),
                     const SizedBox(width: 4),
                     const Text('min',
                         style: TextStyle(
                             fontFamily: AppTheme.displayFont,
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
-                            color: AppColors.inkSoft)),
+                            color: AppColors.textSecondary)),
                     const SizedBox(width: 10),
                     Container(
                       width: 1,
                       height: 12,
-                      color: AppColors.surfaceBorder,
+                      color: AppColors.divider,
                     ),
                     const SizedBox(width: 10),
                     Text(calories,
@@ -692,12 +692,12 @@ class _WorkoutsSection extends StatelessWidget {
                             fontFamily: AppTheme.displayFont,
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
-                            color: AppColors.inkSoft)),
+                            color: AppColors.textSecondary)),
                     const SizedBox(width: 10),
                     Container(
                       width: 1,
                       height: 12,
-                      color: AppColors.surfaceBorder,
+                      color: AppColors.divider,
                     ),
                     const SizedBox(width: 10),
                     Text(pace,
@@ -705,13 +705,13 @@ class _WorkoutsSection extends StatelessWidget {
                             fontFamily: AppTheme.displayFont,
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
-                            color: AppColors.ink)),
+                            color: AppColors.textPrimary)),
                   ],
                 ),
               ],
             ),
           ),
-          const Icon(LucideIcons.chevronRight, size: 14, color: AppColors.ink),
+          const Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textPrimary),
         ],
       ),
     );
@@ -742,7 +742,7 @@ class _WeekTotalsCard extends StatelessWidget {
                   fontFamily: AppTheme.displayFont,
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
-                  color: AppColors.ink,
+                  color: AppColors.textPrimary,
                 ),
               ),
               const Text(
@@ -752,7 +752,7 @@ class _WeekTotalsCard extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   fontSize: 11,
                   height: 1.5,
-                  color: AppColors.inkSoft,
+                  color: AppColors.textSecondary,
                 ),
               ),
             ],
@@ -768,7 +768,7 @@ class _WeekTotalsCard extends StatelessWidget {
               _statItem('BURN', '8,914', null),
             ],
           ),
-          const Divider(height: 32, color: AppColors.surfaceBorder),
+          const Divider(height: 32, color: AppColors.divider),
           // Weekly bar chart
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -797,7 +797,7 @@ class _WeekTotalsCard extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 0.5,
-            color: AppColors.inkSoft,
+            color: AppColors.textSecondary,
           ),
         ),
         const SizedBox(height: 4),
@@ -813,7 +813,7 @@ class _WeekTotalsCard extends StatelessWidget {
                 fontSize: 26,
                 height: 1,
                 letterSpacing: -1.3,
-                color: AppColors.ink,
+                color: AppColors.textPrimary,
               ),
             ),
             if (unit != null) ...[
@@ -824,7 +824,7 @@ class _WeekTotalsCard extends StatelessWidget {
                   fontFamily: AppTheme.displayFont,
                   fontWeight: FontWeight.w500,
                   fontSize: 13,
-                  color: AppColors.inkSoft,
+                  color: AppColors.textSecondary,
                 ),
               ),
             ],
@@ -842,7 +842,7 @@ class _WeekTotalsCard extends StatelessWidget {
           width: 38,
           height: height,
           decoration: BoxDecoration(
-            color: highlight ? AppColors.accentLime : AppColors.surfaceBorder,
+            color: highlight ? AppColors.accentLime : AppColors.divider,
             borderRadius: BorderRadius.circular(6),
           ),
         ),
@@ -854,7 +854,7 @@ class _WeekTotalsCard extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontSize: 9,
             letterSpacing: 1.35,
-            color: highlight ? AppColors.ink : AppColors.inkSoft,
+            color: highlight ? AppColors.textPrimary : AppColors.textSecondary,
           ),
         ),
       ],
