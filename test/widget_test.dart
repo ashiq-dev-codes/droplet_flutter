@@ -1,16 +1,70 @@
 import 'package:droplet_flutter/app.dart';
+import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
+import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
+import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
+import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+
+/// iPhone 17 Pro logical size (1206x2622 physical @3x).
+const _size = Size(402, 874);
 
 void main() {
-  testWidgets('Bottom nav bar renders all items', (WidgetTester tester) async {
-    await tester.pumpWidget(const App());
+  // ── Each page renders without RenderFlex overflow ──────────────
+  group('pages render without overflow', () {
+    for (final page in <Widget>[
+      const TodayPage(),
+      const WorkoutsPage(),
+      const ProgressPage(),
+      const ProfilePage(),
+    ]) {
+      testWidgets('${page.runtimeType}', (tester) async {
+        await tester.binding.setSurfaceSize(_size);
+        addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    // Nav item icons are unique to the bottom bar (placeholder pages are text only)
-    expect(find.byIcon(Icons.home_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.history_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.insights_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.settings_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.add_rounded), findsOneWidget);
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: ThemeData(fontFamily: 'Inter'),
+            home: Scaffold(body: page),
+          ),
+        );
+        await tester.pump();
+
+        expect(tester.takeException(), isNull,
+            reason: '${page.runtimeType} should render without exceptions');
+      });
+    }
+  });
+
+  // ── Switching every tab never throws ───────────────────────────
+  testWidgets('bottom nav switches all 5 tabs without exceptions',
+      (tester) async {
+    await tester.binding.setSurfaceSize(_size);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(const App());
+    await tester.pump();
+
+    final icons = <IconData>[
+      LucideIcons.house,
+      LucideIcons.dumbbell,
+      LucideIcons.chartNoAxesColumn,
+      LucideIcons.heart,
+      LucideIcons.user,
+    ];
+
+    for (final icon in icons) {
+      // Nav icons are always 18px; pages reuse some icons at other sizes.
+      final finder = find.byWidgetPredicate(
+        (w) => w is Icon && w.icon == icon && w.size == 18,
+      );
+      expect(finder, findsOneWidget, reason: 'nav bar has tab $icon');
+      await tester.tap(finder, warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+
+      expect(tester.takeException(), isNull,
+          reason: 'no exceptions after switching tabs');
+    }
   });
 }

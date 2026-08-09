@@ -156,13 +156,17 @@ class _ResumeCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    const Text(
-                      'Upper Body',
-                      style: TextStyle(
-                        fontFamily: AppTheme.displayFont,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                        color: AppColors.white,
+                    const Flexible(
+                      child: Text(
+                        'Upper Body',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: AppTheme.displayFont,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -174,13 +178,17 @@ class _ResumeCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Text(
-                      'Hypertrophy',
-                      style: TextStyle(
-                        fontFamily: AppTheme.displayFont,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                        color: AppColors.white,
+                    const Flexible(
+                      child: Text(
+                        'Hypertrophy',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: AppTheme.displayFont,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ],

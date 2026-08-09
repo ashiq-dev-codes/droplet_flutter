@@ -80,7 +80,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
-        width: active ? null : 44,
         height: 44,
         padding: active
             ? const EdgeInsets.symmetric(horizontal: 14)

@@ -117,7 +117,7 @@ class _KcalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 132,
+      height: 150,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: AppColors.ink,
@@ -142,15 +142,15 @@ class _KcalCard extends StatelessWidget {
                     color: AppColors.inkSoft,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 const Text(
                   '1,842',
                   style: TextStyle(
                     fontFamily: AppTheme.displayFont,
                     fontWeight: FontWeight.w700,
-                    fontSize: 84,
-                    height: 0.9,
-                    letterSpacing: -4.2,
+                    fontSize: 76,
+                    height: 1.0,
+                    letterSpacing: -3.8,
                     color: AppColors.accentOrange,
                   ),
                 ),
@@ -196,14 +196,14 @@ class _KcalCard extends StatelessWidget {
           ),
           // Donut chart
           SizedBox(
-            width: 132,
-            height: 132,
+            width: 112,
+            height: 112,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  width: 114,
-                  height: 114,
+                  width: 100,
+                  height: 100,
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 12,
@@ -213,8 +213,8 @@ class _KcalCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 84,
-                  height: 84,
+                  width: 76,
+                  height: 76,
                   child: CircularProgressIndicator(
                     value: 0.78,
                     strokeWidth: 8,
@@ -243,7 +243,7 @@ class _KcalCard extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         fontSize: 22,
                         height: 1,
-                        color: AppColors.ink,
+                        color: AppColors.white,
                       ),
                     ),
                   ],
@@ -410,7 +410,7 @@ class _ActivitySection extends StatelessWidget {
         // 2x2 grid
         Row(
           children: [
-            Expanded(child: _statCard(LucideIcons.footprints, 'STEPS', '8,240', '/ 10,000', null)),
+            Expanded(child: _statCard(LucideIcons.footprints, 'STEPS', '8,240', null, '/ 10,000')),
             const SizedBox(width: 12),
             Expanded(child: _statCard(LucideIcons.timer, 'ACTIVE MIN', '62', 'min', '+18% vs avg')),
           ],
@@ -427,7 +427,7 @@ class _ActivitySection extends StatelessWidget {
     );
   }
 
-  Widget _statCard(IconData icon, String label, String value, String unit, String? badge) {
+  Widget _statCard(IconData icon, String label, String value, String? unit, String? badge) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -471,16 +471,18 @@ class _ActivitySection extends StatelessWidget {
                   color: AppColors.ink,
                 ),
               ),
-              const SizedBox(width: 2),
-              Text(
-                unit,
-                style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: AppColors.inkSoft,
+              if (unit != null) ...[
+                const SizedBox(width: 2),
+                Text(
+                  unit,
+                  style: const TextStyle(
+                    fontFamily: AppTheme.displayFont,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.inkSoft,
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
           if (badge != null) ...[
