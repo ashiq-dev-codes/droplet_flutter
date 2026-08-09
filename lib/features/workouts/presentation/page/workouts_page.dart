@@ -1,5 +1,5 @@
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_theme.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -18,7 +18,7 @@ class WorkoutsPage extends StatelessWidget {
             Text(
               'Workouts',
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 30,
                 height: 1.2,
@@ -64,7 +64,7 @@ class _SearchBar extends StatelessWidget {
           Text(
             'Search routines, exercises...',
             style: TextStyle(
-              fontFamily: AppTheme.bodyFont,
+              fontFamily: AppFont.inter,
               fontWeight: FontWeight.w400,
               fontSize: 14,
               color: AppColors.textSecondary,
@@ -100,7 +100,7 @@ class _CategoryTabs extends StatelessWidget {
             child: Text(
               tabs[i],
               style: TextStyle(
-                fontFamily: AppTheme.bodyFont,
+                fontFamily: AppFont.inter,
                 fontWeight: active ? FontWeight.w700 : FontWeight.w400,
                 fontSize: 12,
                 color: active ? AppColors.white : AppColors.textPrimary,
@@ -135,7 +135,11 @@ class _ResumeCard extends StatelessWidget {
               color: AppColors.primary,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Icon(LucideIcons.play, size: 32, color: AppColors.accentOrange),
+            child: const Icon(
+              LucideIcons.play,
+              size: 32,
+              color: AppColors.accentOrange,
+            ),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -162,7 +166,7 @@ class _ResumeCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontFamily: AppTheme.displayFont,
+                          fontFamily: AppFont.spaceGrotesk,
                           fontWeight: FontWeight.w700,
                           fontSize: 20,
                           color: AppColors.white,
@@ -184,7 +188,7 @@ class _ResumeCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontFamily: AppTheme.displayFont,
+                          fontFamily: AppFont.spaceGrotesk,
                           fontWeight: FontWeight.w700,
                           fontSize: 20,
                           color: AppColors.white,
@@ -196,7 +200,10 @@ class _ResumeCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 // START NOW button
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.accentLime,
                     borderRadius: BorderRadius.circular(12),
@@ -214,7 +221,11 @@ class _ResumeCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 6),
-                      Icon(LucideIcons.arrowRight, size: 14, color: AppColors.textPrimary),
+                      Icon(
+                        LucideIcons.arrowRight,
+                        size: 14,
+                        color: AppColors.textPrimary,
+                      ),
                     ],
                   ),
                 ),
@@ -241,7 +252,7 @@ class _RecommendedSection extends StatelessWidget {
             const Text(
               'Recommended for you',
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 18,
                 color: AppColors.textPrimary,
@@ -250,7 +261,7 @@ class _RecommendedSection extends StatelessWidget {
             const Text(
               'See all',
               style: TextStyle(
-                fontFamily: AppTheme.bodyFont,
+                fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
                 color: AppColors.textSecondary,
@@ -281,7 +292,7 @@ class _RecommendedSection extends StatelessWidget {
                     Text(
                       titles[i],
                       style: const TextStyle(
-                        fontFamily: AppTheme.displayFont,
+                        fontFamily: AppFont.spaceGrotesk,
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
                         color: AppColors.textPrimary,
@@ -317,7 +328,7 @@ class _RecommendedSection extends StatelessWidget {
                                   Text(
                                     times[i],
                                     style: const TextStyle(
-                                      fontFamily: AppTheme.bodyFont,
+                                      fontFamily: AppFont.inter,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
                                       color: AppColors.white,
@@ -371,7 +382,7 @@ class _LibrarySection extends StatelessWidget {
         const Text(
           'Library',
           style: TextStyle(
-            fontFamily: AppTheme.displayFont,
+            fontFamily: AppFont.spaceGrotesk,
             fontWeight: FontWeight.w700,
             fontSize: 18,
             color: AppColors.textPrimary,
@@ -409,13 +420,17 @@ class _LibrarySection extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
                 color: AppColors.textPrimary,
               ),
             ),
-            Icon(LucideIcons.playCircle, size: 16, color: AppColors.textSecondary),
+            Icon(
+              LucideIcons.playCircle,
+              size: 16,
+              color: AppColors.textSecondary,
+            ),
           ],
         ),
       ],
@@ -434,7 +449,7 @@ class _FavoritesSection extends StatelessWidget {
         const Text(
           'Favorites',
           style: TextStyle(
-            fontFamily: AppTheme.displayFont,
+            fontFamily: AppFont.spaceGrotesk,
             fontWeight: FontWeight.w700,
             fontSize: 18,
             color: AppColors.textPrimary,
@@ -469,7 +484,7 @@ class _FavoritesSection extends StatelessWidget {
             child: Text(
               '$index',
               style: const TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 16,
                 color: AppColors.textPrimary,
@@ -484,7 +499,7 @@ class _FavoritesSection extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: AppTheme.displayFont,
+                    fontFamily: AppFont.spaceGrotesk,
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
                     color: AppColors.textPrimary,
@@ -502,7 +517,11 @@ class _FavoritesSection extends StatelessWidget {
               ],
             ),
           ),
-          Icon(LucideIcons.playCircle, size: 20, color: AppColors.textSecondary),
+          Icon(
+            LucideIcons.playCircle,
+            size: 20,
+            color: AppColors.textSecondary,
+          ),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_theme.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -59,7 +59,7 @@ class _TodayHeader extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 12),
         // Greeting
         const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,23 +67,21 @@ class _TodayHeader extends StatelessWidget {
             Text(
               'TUESDAY · WEEK 18',
               style: TextStyle(
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w400,
                 fontSize: 11,
                 letterSpacing: 2.2,
-                height: 1,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
                 color: AppColors.textSecondary,
               ),
             ),
-            SizedBox(height: 4),
             Text(
               'Morning, Mara.',
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
-                fontWeight: FontWeight.w600,
                 fontSize: 17,
                 height: 1.29,
+                fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
+                fontFamily: AppFont.spaceGrotesk,
               ),
             ),
           ],
@@ -146,7 +144,7 @@ class _KcalCard extends StatelessWidget {
                 const Text(
                   '1,842',
                   style: TextStyle(
-                    fontFamily: AppTheme.displayFont,
+                    fontFamily: AppFont.spaceGrotesk,
                     fontWeight: FontWeight.w700,
                     fontSize: 76,
                     height: 1.0,
@@ -160,12 +158,13 @@ class _KcalCard extends StatelessWidget {
                     // Goal pill
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.textPrimary,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                            color: AppColors.primary, width: 1),
+                        border: Border.all(color: AppColors.primary, width: 1),
                       ),
                       child: const Text(
                         'GOAL 2,400',
@@ -209,7 +208,8 @@ class _KcalCard extends StatelessWidget {
                     strokeWidth: 12,
                     backgroundColor: AppColors.primary,
                     valueColor: const AlwaysStoppedAnimation(
-                        AppColors.accentOrange),
+                      AppColors.accentOrange,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -220,7 +220,8 @@ class _KcalCard extends StatelessWidget {
                     strokeWidth: 8,
                     backgroundColor: AppColors.primary,
                     valueColor: const AlwaysStoppedAnimation(
-                        AppColors.accentLime),
+                      AppColors.accentLime,
+                    ),
                   ),
                 ),
                 const Column(
@@ -239,7 +240,7 @@ class _KcalCard extends StatelessWidget {
                     Text(
                       '78%',
                       style: TextStyle(
-                        fontFamily: AppTheme.displayFont,
+                        fontFamily: AppFont.spaceGrotesk,
                         fontWeight: FontWeight.w700,
                         fontSize: 22,
                         height: 1,
@@ -275,7 +276,11 @@ class _StreakCard extends StatelessWidget {
           // Header row
           Row(
             children: [
-              const Icon(LucideIcons.flame, size: 16, color: AppColors.accentOrange),
+              const Icon(
+                LucideIcons.flame,
+                size: 16,
+                color: AppColors.accentOrange,
+              ),
               const SizedBox(width: 6),
               const Text(
                 'STREAK',
@@ -296,7 +301,7 @@ class _StreakCard extends StatelessWidget {
                   const Text(
                     '17',
                     style: TextStyle(
-                      fontFamily: AppTheme.displayFont,
+                      fontFamily: AppFont.spaceGrotesk,
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
                       color: AppColors.accentLime,
@@ -306,7 +311,7 @@ class _StreakCard extends StatelessWidget {
                   const Text(
                     'days',
                     style: TextStyle(
-                      fontFamily: AppTheme.displayFont,
+                      fontFamily: AppFont.spaceGrotesk,
                       fontWeight: FontWeight.w700,
                       fontSize: 13,
                       color: AppColors.textSecondary,
@@ -383,7 +388,7 @@ class _ActivitySection extends StatelessWidget {
             const Text(
               "Today's activity",
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
                 color: AppColors.textPrimary,
@@ -394,14 +399,18 @@ class _ActivitySection extends StatelessWidget {
                 const Text(
                   'Details',
                   style: TextStyle(
-                    fontFamily: AppTheme.bodyFont,
+                    fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                     color: AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(width: 4),
-                Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textPrimary),
+                Icon(
+                  LucideIcons.chevronRight,
+                  size: 14,
+                  color: AppColors.textPrimary,
+                ),
               ],
             ),
           ],
@@ -410,24 +419,62 @@ class _ActivitySection extends StatelessWidget {
         // 2x2 grid
         Row(
           children: [
-            Expanded(child: _statCard(LucideIcons.footprints, 'STEPS', '8,240', null, '/ 10,000')),
+            Expanded(
+              child: _statCard(
+                LucideIcons.footprints,
+                'STEPS',
+                '8,240',
+                null,
+                '/ 10,000',
+              ),
+            ),
             const SizedBox(width: 12),
-            Expanded(child: _statCard(LucideIcons.timer, 'ACTIVE MIN', '62', 'min', '+18% vs avg')),
+            Expanded(
+              child: _statCard(
+                LucideIcons.timer,
+                'ACTIVE MIN',
+                '62',
+                'min',
+                '+18% vs avg',
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 12),
         Row(
           children: [
-            Expanded(child: _statCard(LucideIcons.heartPulse, 'RESTING HR', '54', 'bpm', null)),
+            Expanded(
+              child: _statCard(
+                LucideIcons.heartPulse,
+                'RESTING HR',
+                '54',
+                'bpm',
+                null,
+              ),
+            ),
             const SizedBox(width: 12),
-            Expanded(child: _statCard(LucideIcons.apple, 'INTAKE', '1,420', 'kcal', null)),
+            Expanded(
+              child: _statCard(
+                LucideIcons.apple,
+                'INTAKE',
+                '1,420',
+                'kcal',
+                null,
+              ),
+            ),
           ],
         ),
       ],
     );
   }
 
-  Widget _statCard(IconData icon, String label, String value, String? unit, String? badge) {
+  Widget _statCard(
+    IconData icon,
+    String label,
+    String value,
+    String? unit,
+    String? badge,
+  ) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -463,7 +510,7 @@ class _ActivitySection extends StatelessWidget {
               Text(
                 value,
                 style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w700,
                   fontSize: 34,
                   height: 1,
@@ -476,7 +523,7 @@ class _ActivitySection extends StatelessWidget {
                 Text(
                   unit,
                   style: const TextStyle(
-                    fontFamily: AppTheme.displayFont,
+                    fontFamily: AppFont.spaceGrotesk,
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: AppColors.textSecondary,
@@ -519,7 +566,7 @@ class _WorkoutsSection extends StatelessWidget {
             const Text(
               'Recent workouts',
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w600,
                 fontSize: 15,
                 color: AppColors.textPrimary,
@@ -651,7 +698,7 @@ class _WorkoutsSection extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: AppTheme.displayFont,
+                    fontFamily: AppFont.spaceGrotesk,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     color: AppColors.textPrimary,
@@ -660,58 +707,69 @@ class _WorkoutsSection extends StatelessWidget {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Text(duration,
-                        style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: AppColors.textPrimary)),
+                    Text(
+                      duration,
+                      style: const TextStyle(
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    const Text('min',
-                        style: TextStyle(
-                            fontFamily: AppTheme.displayFont,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: AppColors.textSecondary)),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 1,
-                      height: 12,
-                      color: AppColors.divider,
+                    const Text(
+                      'min',
+                      style: TextStyle(
+                        fontFamily: AppFont.spaceGrotesk,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                     const SizedBox(width: 10),
-                    Text(calories,
-                        style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: AppColors.accentOrange)),
-                    const SizedBox(width: 4),
-                    const Text('kcal',
-                        style: TextStyle(
-                            fontFamily: AppTheme.displayFont,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: AppColors.textSecondary)),
+                    Container(width: 1, height: 12, color: AppColors.divider),
                     const SizedBox(width: 10),
-                    Container(
-                      width: 1,
-                      height: 12,
-                      color: AppColors.divider,
+                    Text(
+                      calories,
+                      style: const TextStyle(
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.accentOrange,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    const Text(
+                      'kcal',
+                      style: TextStyle(
+                        fontFamily: AppFont.spaceGrotesk,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                     const SizedBox(width: 10),
-                    Text(pace,
-                        style: const TextStyle(
-                            fontFamily: AppTheme.displayFont,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: AppColors.textPrimary)),
+                    Container(width: 1, height: 12, color: AppColors.divider),
+                    const SizedBox(width: 10),
+                    Text(
+                      pace,
+                      style: const TextStyle(
+                        fontFamily: AppFont.spaceGrotesk,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          const Icon(LucideIcons.chevronRight, size: 14, color: AppColors.textPrimary),
+          const Icon(
+            LucideIcons.chevronRight,
+            size: 14,
+            color: AppColors.textPrimary,
+          ),
         ],
       ),
     );
@@ -739,7 +797,7 @@ class _WeekTotalsCard extends StatelessWidget {
               const Text(
                 'Week 18 · totals',
                 style: TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
                   color: AppColors.textPrimary,
@@ -808,7 +866,7 @@ class _WeekTotalsCard extends StatelessWidget {
             Text(
               value,
               style: const TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 26,
                 height: 1,
@@ -821,7 +879,7 @@ class _WeekTotalsCard extends StatelessWidget {
               Text(
                 unit,
                 style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w500,
                   fontSize: 13,
                   color: AppColors.textSecondary,

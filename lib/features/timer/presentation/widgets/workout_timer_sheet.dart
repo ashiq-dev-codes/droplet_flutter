@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_theme.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -73,8 +73,9 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
     return '$m:$s';
   }
 
-  String get _statusText =>
-      _completed ? 'COMPLETE' : (_running ? 'FOCUS' : (_inSetup ? 'READY' : 'PAUSED'));
+  String get _statusText => _completed
+      ? 'COMPLETE'
+      : (_running ? 'FOCUS' : (_inSetup ? 'READY' : 'PAUSED'));
 
   IconData get _statusIcon =>
       _completed || _running ? LucideIcons.flame : LucideIcons.timer;
@@ -157,7 +158,11 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(LucideIcons.timer, size: 20, color: AppColors.textPrimary),
+          child: const Icon(
+            LucideIcons.timer,
+            size: 20,
+            color: AppColors.textPrimary,
+          ),
         ),
         const SizedBox(width: 12),
         const Column(
@@ -176,7 +181,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
             Text(
               'Next session',
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
                 color: AppColors.textPrimary,
@@ -194,7 +199,11 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(LucideIcons.x, size: 18, color: AppColors.textPrimary),
+            child: const Icon(
+              LucideIcons.x,
+              size: 18,
+              color: AppColors.textPrimary,
+            ),
           ),
         ),
       ],
@@ -245,7 +254,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
               Text(
                 _timeLabel,
                 style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w700,
                   fontSize: 52,
                   height: 1,
@@ -292,7 +301,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
         child: Text(
           '$m',
           style: TextStyle(
-            fontFamily: AppTheme.displayFont,
+            fontFamily: AppFont.spaceGrotesk,
             fontWeight: FontWeight.w700,
             fontSize: 15,
             color: selected ? AppColors.white : AppColors.textPrimary,
@@ -313,7 +322,7 @@ class _WorkoutTimerSheetState extends State<WorkoutTimerSheet> {
             child: Text(
               '$_minutes MIN',
               style: const TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 18,
                 color: AppColors.textPrimary,

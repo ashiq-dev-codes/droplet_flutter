@@ -9,8 +9,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pulse',
-      debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
+      debugShowCheckedModeBanner: false,
       home: const BottomNavBar(),
     );
   }

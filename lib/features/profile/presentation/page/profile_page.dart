@@ -1,5 +1,5 @@
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_theme.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -18,23 +18,39 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 24),
             _BodyStats(),
             SizedBox(height: 24),
-            _MenuSection(title: 'ACCOUNT', items: [
-              _MenuItem(LucideIcons.user, 'Personal Information'),
-              _MenuItem(LucideIcons.target, 'My Goals'),
-              _MenuItem(LucideIcons.creditCard, 'Subscription'),
-            ]),
+            _MenuSection(
+              title: 'ACCOUNT',
+              items: [
+                _MenuItem(LucideIcons.user, 'Personal Information'),
+                _MenuItem(LucideIcons.target, 'My Goals'),
+                _MenuItem(LucideIcons.creditCard, 'Subscription'),
+              ],
+            ),
             SizedBox(height: 20),
-            _MenuSection(title: 'SETTINGS', items: [
-              _MenuItemWithTrailing(LucideIcons.bell, 'Notifications', trailing: _OnBadge()),
-              _MenuItemWithTrailing(LucideIcons.bluetooth, 'Connected Devices',
-                  trailing: _DeviceIcons()),
-              _MenuItem(LucideIcons.shield, 'Privacy & Security'),
-            ]),
+            _MenuSection(
+              title: 'SETTINGS',
+              items: [
+                _MenuItemWithTrailing(
+                  LucideIcons.bell,
+                  'Notifications',
+                  trailing: _OnBadge(),
+                ),
+                _MenuItemWithTrailing(
+                  LucideIcons.bluetooth,
+                  'Connected Devices',
+                  trailing: _DeviceIcons(),
+                ),
+                _MenuItem(LucideIcons.shield, 'Privacy & Security'),
+              ],
+            ),
             SizedBox(height: 20),
-            _MenuSection(title: 'SUPPORT', items: [
-              _MenuItem(LucideIcons.helpCircle, 'FAQ & Help'),
-              _MenuItem(LucideIcons.logOut, 'Log out', isDestructive: true),
-            ]),
+            _MenuSection(
+              title: 'SUPPORT',
+              items: [
+                _MenuItem(LucideIcons.helpCircle, 'FAQ & Help'),
+                _MenuItem(LucideIcons.logOut, 'Log out', isDestructive: true),
+              ],
+            ),
             SizedBox(height: 24),
             Text(
               'PULSE V4.7.2',
@@ -92,7 +108,11 @@ class _ProfileHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.white, width: 3),
                 ),
-                child: const Icon(LucideIcons.camera, size: 14, color: AppColors.textPrimary),
+                child: const Icon(
+                  LucideIcons.camera,
+                  size: 14,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ),
           ],
@@ -101,7 +121,7 @@ class _ProfileHeader extends StatelessWidget {
         const Text(
           'Mara Jensen',
           style: TextStyle(
-            fontFamily: AppTheme.displayFont,
+            fontFamily: AppFont.spaceGrotesk,
             fontWeight: FontWeight.w700,
             fontSize: 24,
             height: 1.33,
@@ -195,7 +215,7 @@ class _Stat extends StatelessWidget {
             Text(
               value,
               style: const TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 22,
                 color: AppColors.textPrimary,
@@ -205,7 +225,7 @@ class _Stat extends StatelessWidget {
               Text(
                 unit!,
                 style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                   color: AppColors.textSecondary,
@@ -223,11 +243,7 @@ class _Divider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 1,
-      height: 32,
-      color: AppColors.divider,
-    );
+    return Container(width: 1, height: 32, color: AppColors.divider);
   }
 }
 
@@ -276,7 +292,9 @@ class _MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isDestructive ? AppColors.accentOrange : AppColors.textPrimary;
+    final color = isDestructive
+        ? AppColors.accentOrange
+        : AppColors.textPrimary;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Row(
@@ -295,14 +313,18 @@ class _MenuItem extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                fontFamily: AppTheme.bodyFont,
+                fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
                 color: color,
               ),
             ),
           ),
-          Icon(LucideIcons.chevronRight, size: 16, color: AppColors.textSecondary),
+          Icon(
+            LucideIcons.chevronRight,
+            size: 16,
+            color: AppColors.textSecondary,
+          ),
         ],
       ),
     );
@@ -336,7 +358,7 @@ class _MenuItemWithTrailing extends StatelessWidget {
             child: Text(
               label,
               style: const TextStyle(
-                fontFamily: AppTheme.bodyFont,
+                fontFamily: AppFont.inter,
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
                 color: AppColors.textPrimary,

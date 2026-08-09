@@ -1,5 +1,5 @@
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_theme.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -19,7 +19,7 @@ class ProgressPage extends StatelessWidget {
             Text(
               'Progress',
               style: TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 30,
                 height: 1.2,
@@ -81,10 +81,12 @@ class _FilterTabs extends StatelessWidget {
               child: Text(
                 tabs[i],
                 style: TextStyle(
-                  fontFamily: AppTheme.bodyFont,
+                  fontFamily: AppFont.inter,
                   fontWeight: active ? FontWeight.w700 : FontWeight.w400,
                   fontSize: 12,
-                  color: active ? AppColors.textPrimary : AppColors.textSecondary,
+                  color: active
+                      ? AppColors.textPrimary
+                      : AppColors.textSecondary,
                 ),
               ),
             ),
@@ -119,7 +121,13 @@ class _StatsRow extends StatelessWidget {
     );
   }
 
-  Widget _stat(String label, String value, String? unit, Color? badgeColor, String badge) {
+  Widget _stat(
+    String label,
+    String value,
+    String? unit,
+    Color? badgeColor,
+    String badge,
+  ) {
     return Column(
       children: [
         Text(
@@ -140,7 +148,7 @@ class _StatsRow extends StatelessWidget {
             Text(
               value,
               style: const TextStyle(
-                fontFamily: AppTheme.displayFont,
+                fontFamily: AppFont.spaceGrotesk,
                 fontWeight: FontWeight.w700,
                 fontSize: 26,
                 height: 1,
@@ -152,7 +160,7 @@ class _StatsRow extends StatelessWidget {
               Text(
                 unit,
                 style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                   color: AppColors.textSecondary,
@@ -175,11 +183,7 @@ class _StatsRow extends StatelessWidget {
   }
 
   Widget _divider() {
-    return Container(
-      width: 1,
-      height: 40,
-      color: AppColors.divider,
-    );
+    return Container(width: 1, height: 40, color: AppColors.divider);
   }
 }
 
@@ -209,7 +213,7 @@ class _ActivityVolumeChart extends StatelessWidget {
                   const Text(
                     'Activity Volume',
                     style: TextStyle(
-                      fontFamily: AppTheme.displayFont,
+                      fontFamily: AppFont.spaceGrotesk,
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
                       height: 1.55,
@@ -259,7 +263,9 @@ class _ActivityVolumeChart extends StatelessWidget {
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.w700,
                           fontSize: 9,
-                          color: isActive ? AppColors.textPrimary : AppColors.textSecondary,
+                          color: isActive
+                              ? AppColors.textPrimary
+                              : AppColors.textSecondary,
                         ),
                       ),
                     ],
@@ -285,7 +291,7 @@ class _PersonalRecords extends StatelessWidget {
         const Text(
           'Personal Records',
           style: TextStyle(
-            fontFamily: AppTheme.displayFont,
+            fontFamily: AppFont.spaceGrotesk,
             fontWeight: FontWeight.w700,
             fontSize: 18,
             height: 1.55,
@@ -344,7 +350,7 @@ class _PersonalRecords extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: AppTheme.displayFont,
+                    fontFamily: AppFont.spaceGrotesk,
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
                     color: AppColors.textPrimary,
@@ -368,7 +374,7 @@ class _PersonalRecords extends StatelessWidget {
               Text(
                 value,
                 style: const TextStyle(
-                  fontFamily: AppTheme.displayFont,
+                  fontFamily: AppFont.spaceGrotesk,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
                   color: AppColors.textPrimary,
