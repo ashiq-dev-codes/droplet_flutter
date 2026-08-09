@@ -1,5 +1,6 @@
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -31,14 +32,16 @@ class HomeHeader extends StatelessWidget {
               children: [
                 Text(
                   'Hello, Suhan',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.textPrimary,
                   ),
                 ),
                 Text(
                   'Stay hydrated today',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  style: TextStyle(
+                    fontSize: 14,
                     color: AppColors.textSecondary,
                   ),
                 ),
@@ -52,18 +55,11 @@ class HomeHeader extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.whiteColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 2),
-                ),
-              ],
             ),
             child: const Icon(
-              Icons.notifications_outlined,
-              color: AppColors.textPrimary,
+              LucideIcons.bell,
               size: 24,
+              color: AppColors.textPrimary,
             ),
           ),
         ],
