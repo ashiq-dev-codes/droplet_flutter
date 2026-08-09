@@ -88,22 +88,44 @@ class _TodayHeader extends StatelessWidget {
         ),
         const Spacer(),
         // Icons
-        _iconButton(LucideIcons.bell),
+        _iconButton(icon: LucideIcons.search),
         const SizedBox(width: 8),
-        _iconButton(LucideIcons.search),
+        _iconButton(icon: LucideIcons.bell, showIndicator: true),
       ],
     );
   }
 
-  static Widget _iconButton(IconData icon) {
+  static Widget _iconButton({
+    required IconData icon,
+    bool showIndicator = false,
+  }) {
     return Container(
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
+        shape: BoxShape.circle,
+        color: AppColors.backgroundDark,
       ),
-      child: Icon(icon, size: 18, color: AppColors.textPrimary),
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Icon(icon, size: 18, color: AppColors.textPrimary),
+          if (showIndicator)
+            Positioned(
+              top: 9,
+              right: 11,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.accentOrange,
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
