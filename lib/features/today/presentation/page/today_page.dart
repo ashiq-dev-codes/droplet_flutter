@@ -328,8 +328,31 @@ class _KcalCardState extends State<_KcalCard>
 }
 
 // ── Streak card (dark) ──────────────────────────────────────────
-class _StreakCard extends StatelessWidget {
+class _StreakCard extends StatefulWidget {
   const _StreakCard();
+
+  @override
+  State<_StreakCard> createState() => _StreakCardState();
+}
+
+class _StreakCardState extends State<_StreakCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..forward();
+
+  @override
+  void didUpdateWidget(_StreakCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.forward(from: 0); // replay on hot reload / tab return
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -592,28 +615,34 @@ class _StreakCard extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 11),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 6,
-            height: height > 0 ? height : 4,
-            margin: const EdgeInsets.only(bottom: 8),
-            decoration: BoxDecoration(
-              color: barColor,
-              borderRadius: BorderRadius.circular(111),
-            ),
-          ),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 9,
-              color: labelColor,
-              fontFamily: AppFont.inter,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          final t = Curves.easeOutCubic.transform(_controller.value);
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 6,
+                height: height > 0 ? height * t : 4,
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: barColor,
+                  borderRadius: BorderRadius.circular(111),
+                ),
+              ),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 9,
+                  color: labelColor,
+                  fontFamily: AppFont.inter,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
