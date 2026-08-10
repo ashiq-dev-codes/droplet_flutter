@@ -888,6 +888,8 @@ class _ActivitySectionState extends State<_ActivitySection>
 class _WorkoutsSection extends StatelessWidget {
   const _WorkoutsSection();
 
+  static const _filters = ['All', 'Run', 'Lift'];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -899,26 +901,25 @@ class _WorkoutsSection extends StatelessWidget {
             const Text(
               'Recent workouts',
               style: TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w600,
                 fontSize: 15,
+                fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary,
+                fontFamily: AppFont.spaceGrotesk,
               ),
             ),
             Row(
               children: [
-                _filterChip('All', true),
-                const SizedBox(width: 6),
-                _filterChip('Run', false),
-                const SizedBox(width: 6),
-                _filterChip('Lift', false),
+                for (var i = 0; i < _filters.length; i++) ...[
+                  if (i > 0) const SizedBox(width: 6),
+                  _filterChip(_filters[i], i == 0),
+                ],
               ],
             ),
           ],
         ),
         const SizedBox(height: 12),
         _workoutTile(
-          icon: LucideIcons.activity,
+          imagePath: 'assets/images/recent_img_1.png',
           tag: 'TEMPO RUN',
           tagBadge: 'PR',
           title: 'Riverside 8K',
@@ -926,18 +927,18 @@ class _WorkoutsSection extends StatelessWidget {
           calories: '612',
           pace: '5:16 /km',
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 12),
         _workoutTile(
-          icon: LucideIcons.dumbbell,
+          imagePath: 'assets/images/recent_img_2.png',
           tag: 'STRENGTH · PUSH',
           title: 'Upper body · heavy',
           duration: '58:04',
           calories: '486',
           pace: '9 sets',
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 12),
         _workoutTile(
-          icon: LucideIcons.armchair,
+          imagePath: 'assets/images/recent_img_3.png',
           tag: 'MOBILITY',
           title: 'Morning flow',
           duration: '22:40',
@@ -950,25 +951,25 @@ class _WorkoutsSection extends StatelessWidget {
 
   Widget _filterChip(String label, bool active) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
       decoration: BoxDecoration(
-        color: active ? AppColors.textPrimary : AppColors.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(111),
+        color: active ? AppColors.primary : AppColors.backgroundDark,
       ),
       child: Text(
         label,
         style: TextStyle(
+          fontSize: 11,
           fontFamily: AppFont.inter,
-          fontWeight: FontWeight.w600,
-          fontSize: 12,
-          color: active ? AppColors.white : AppColors.textPrimary,
+          fontWeight: FontWeight.w400,
+          color: active ? AppColors.background : AppColors.textSecondary,
         ),
       ),
     );
   }
 
   Widget _workoutTile({
-    required IconData icon,
+    required String imagePath,
     required String tag,
     String? tagBadge,
     required String title,
@@ -977,24 +978,21 @@ class _WorkoutsSection extends StatelessWidget {
     required String pace,
   }) {
     return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(32),
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 20.5, horizontal: 16),
       child: Row(
         children: [
-          // Icon
-          Container(
-            width: 72,
-            height: 72,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(16),
+          // Thumbnail image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              imagePath,
+              width: 72,
+              height: 72,
+              fit: BoxFit.cover,
             ),
-            child: Icon(icon, size: 28, color: AppColors.textPrimary),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 16),
+
           // Info
           Expanded(
             child: Column(
@@ -1005,36 +1003,45 @@ class _WorkoutsSection extends StatelessWidget {
                     Text(
                       tag,
                       style: const TextStyle(
-                        fontFamily: AppFont.inter,
-                        fontWeight: FontWeight.w400,
                         fontSize: 10,
                         letterSpacing: 1.8,
+                        fontFamily: AppFont.inter,
+                        fontWeight: FontWeight.w400,
                         color: AppColors.textSecondary,
                       ),
                     ),
                     if (tagBadge != null) ...[
                       const SizedBox(width: 6),
+                      Container(
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.accentLime,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
                       Text(
                         tagBadge,
-                        style: const TextStyle(
-                          fontFamily: AppFont.inter,
-                          fontWeight: FontWeight.w600,
+                        style: TextStyle(
                           fontSize: 10,
                           letterSpacing: 1.8,
-                          color: AppColors.accentOrange,
+                          fontFamily: AppFont.inter,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textPrimary.withValues(alpha: 0.7),
                         ),
                       ),
                     ],
                   ],
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 4),
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: AppFont.spaceGrotesk,
-                    fontWeight: FontWeight.w600,
                     fontSize: 16,
+                    fontWeight: FontWeight.w600,
                     color: AppColors.textPrimary,
+                    fontFamily: AppFont.spaceGrotesk,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -1043,54 +1050,52 @@ class _WorkoutsSection extends StatelessWidget {
                     Text(
                       duration,
                       style: const TextStyle(
+                        fontSize: 12,
                         fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
                         color: AppColors.textPrimary,
                       ),
                     ),
-                    const SizedBox(width: 4),
                     const Text(
                       'min',
                       style: TextStyle(
-                        fontFamily: AppFont.spaceGrotesk,
-                        fontWeight: FontWeight.w500,
                         fontSize: 12,
+                        fontWeight: FontWeight.w400,
                         color: AppColors.textSecondary,
+                        fontFamily: AppFont.spaceGrotesk,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 12),
                     Container(width: 1, height: 12, color: AppColors.divider),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 12),
                     Text(
                       calories,
                       style: const TextStyle(
+                        fontSize: 12,
                         fontFamily: AppFont.inter,
                         fontWeight: FontWeight.w500,
-                        fontSize: 12,
                         color: AppColors.accentOrange,
                       ),
                     ),
-                    const SizedBox(width: 4),
                     const Text(
                       'kcal',
                       style: TextStyle(
-                        fontFamily: AppFont.spaceGrotesk,
-                        fontWeight: FontWeight.w500,
                         fontSize: 12,
+                        fontWeight: FontWeight.w400,
                         color: AppColors.textSecondary,
+                        fontFamily: AppFont.spaceGrotesk,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 12),
                     Container(width: 1, height: 12, color: AppColors.divider),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 12),
                     Text(
                       pace,
                       style: const TextStyle(
-                        fontFamily: AppFont.spaceGrotesk,
-                        fontWeight: FontWeight.w500,
                         fontSize: 12,
-                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textSecondary,
+                        fontFamily: AppFont.spaceGrotesk,
                       ),
                     ),
                   ],
@@ -1098,10 +1103,11 @@ class _WorkoutsSection extends StatelessWidget {
               ],
             ),
           ),
+
           const Icon(
             LucideIcons.chevronRight,
             size: 14,
-            color: AppColors.textPrimary,
+            color: AppColors.textSecondary,
           ),
         ],
       ),
