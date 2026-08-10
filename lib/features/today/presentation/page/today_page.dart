@@ -45,7 +45,7 @@ class TodayPage extends StatelessWidget {
 
                   // Workouts
                   _WorkoutsSection(),
-                  SizedBox(height: 24),
+                  SizedBox(height: 44),
 
                   // Week totals
                   _WeekTotalsCard(),
@@ -1124,11 +1124,10 @@ class _WeekTotalsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.backgroundDark,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1136,47 +1135,60 @@ class _WeekTotalsCard extends StatelessWidget {
               const Text(
                 'Week 18 · totals',
                 style: TextStyle(
-                  fontFamily: AppFont.spaceGrotesk,
-                  fontWeight: FontWeight.w600,
                   fontSize: 15,
+                  fontWeight: FontWeight.w600,
                   color: AppColors.textPrimary,
+                  fontFamily: AppFont.spaceGrotesk,
                 ),
               ),
               const Text(
                 'Mon — Sun',
                 style: TextStyle(
+                  fontSize: 11,
                   fontFamily: AppFont.inter,
                   fontWeight: FontWeight.w400,
-                  fontSize: 11,
-                  height: 1.5,
                   color: AppColors.textSecondary,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 16),
+
           // Stats row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _statItem('WORKOUTS', '06', null),
-              _statItem('TIME', '5:12', 'h'),
-              _statItem('DISTANCE', '34.2', 'km'),
-              _statItem('BURN', '8,914', null),
+              _statItem(label: 'WORKOUTS', value: '06'),
+              _statItem(label: 'TIME', value: '5:12', unit: 'h'),
+              _statItem(label: 'DISTANCE', value: '34.2', unit: 'km'),
+              _statItem(
+                label: 'BURN',
+                value: '8,914',
+                valueColor: AppColors.accentOrange,
+              ),
             ],
           ),
-          const Divider(height: 32, color: AppColors.divider),
+          SizedBox(height: 20),
+          const Divider(height: 0, color: AppColors.divider),
+          SizedBox(height: 20),
+
           // Weekly bar chart
           Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _weekBar('M', 38, true),
-              _weekBar('T', 42, false),
-              _weekBar('W', 11, false),
-              _weekBar('T', 42, false),
-              _weekBar('F', 30, false),
-              _weekBar('S', 42, false),
-              _weekBar('S', 42, false),
+              _weekBar(label: 'M', height: 38, barColor: AppColors.primary),
+              _weekBar(label: 'T', height: 42, barColor: AppColors.primary),
+              _weekBar(label: 'W', height: 11),
+              _weekBar(label: 'T', height: 42, barColor: AppColors.primary),
+              _weekBar(label: 'F', height: 30, barColor: AppColors.primary),
+              _weekBar(label: 'S', height: 42, barColor: AppColors.primary),
+              _weekBar(
+                label: 'S',
+                height: 42,
+                barColor: AppColors.accentLime,
+                textColor: AppColors.textPrimary,
+              ),
             ],
           ),
         ],
@@ -1184,16 +1196,22 @@ class _WeekTotalsCard extends StatelessWidget {
     );
   }
 
-  Widget _statItem(String label, String value, String? unit) {
+  Widget _statItem({
+    String? unit,
+    Color? valueColor,
+    required String label,
+    required String value,
+  }) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
           style: const TextStyle(
-            fontFamily: AppFont.inter,
-            fontWeight: FontWeight.w400,
             fontSize: 10,
             letterSpacing: 0.5,
+            fontFamily: AppFont.inter,
+            fontWeight: FontWeight.w400,
             color: AppColors.textSecondary,
           ),
         ),
@@ -1204,13 +1222,13 @@ class _WeekTotalsCard extends StatelessWidget {
           children: [
             Text(
               value,
-              style: const TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w700,
-                fontSize: 26,
+              style: TextStyle(
                 height: 1,
+                fontSize: 26,
                 letterSpacing: -1.3,
-                color: AppColors.textPrimary,
+                fontWeight: FontWeight.bold,
+                fontFamily: AppFont.spaceGrotesk,
+                color: valueColor ?? AppColors.textPrimary,
               ),
             ),
             if (unit != null) ...[
@@ -1218,10 +1236,10 @@ class _WeekTotalsCard extends StatelessWidget {
               Text(
                 unit,
                 style: const TextStyle(
-                  fontFamily: AppFont.spaceGrotesk,
-                  fontWeight: FontWeight.w500,
                   fontSize: 13,
+                  fontWeight: FontWeight.w500,
                   color: AppColors.textSecondary,
+                  fontFamily: AppFont.spaceGrotesk,
                 ),
               ),
             ],
@@ -1231,27 +1249,36 @@ class _WeekTotalsCard extends StatelessWidget {
     );
   }
 
-  Widget _weekBar(String label, double height, bool highlight) {
+  Widget _weekBar({
+    Color? barColor,
+    Color? textColor,
+    required String label,
+    required double height,
+  }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
           width: 38,
           height: height,
           decoration: BoxDecoration(
-            color: highlight ? AppColors.accentLime : AppColors.divider,
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(14),
+              topRight: Radius.circular(14),
+            ),
+            color: barColor ?? AppColors.border.withValues(alpha: 0.3),
           ),
         ),
         const SizedBox(height: 8),
         Text(
           label,
           style: TextStyle(
-            fontFamily: AppFont.inter,
-            fontWeight: FontWeight.w700,
             fontSize: 9,
             letterSpacing: 1.35,
-            color: highlight ? AppColors.textPrimary : AppColors.textSecondary,
+            fontFamily: AppFont.inter,
+            fontWeight: FontWeight.w400,
+            color: textColor ?? AppColors.textSecondary,
           ),
         ),
       ],
