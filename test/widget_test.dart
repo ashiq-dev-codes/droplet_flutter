@@ -1,30 +1,78 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:droplet_flutter/app.dart';
+import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
+import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
+import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
+import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
+import 'package:droplet_flutter/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import 'package:droplet_flutter/main.dart';
+/// iPhone 17 Pro logical size (1206x2622 physical @3x).
+const _size = Size(402, 874);
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  // ── Each page renders without RenderFlex overflow ──────────────
+  group('pages render without overflow', () {
+    for (final page in <Widget>[
+      const TodayPage(),
+      const WorkoutsPage(),
+      const ProgressPage(),
+      const ProfilePage(),
+    ]) {
+      testWidgets('${page.runtimeType}', (tester) async {
+        await tester.binding.setSurfaceSize(_size);
+        addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+        await tester.pumpWidget(
+          MaterialApp(
+            theme: ThemeData(fontFamily: AppFont.inter),
+            home: Scaffold(body: page),
+          ),
+        );
+        await tester.pump();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+        expect(
+          tester.takeException(),
+          isNull,
+          reason: '${page.runtimeType} should render without exceptions',
+        );
+      });
+    }
+  });
+
+  // ── Switching every tab never throws ───────────────────────────
+  testWidgets('bottom nav switches all 5 tabs without exceptions', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(_size);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(const App());
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    final icons = <IconData>[
+      LucideIcons.house,
+      LucideIcons.dumbbell,
+      LucideIcons.plus,
+      LucideIcons.chartNoAxesColumn,
+      LucideIcons.user,
+    ];
+
+    for (final icon in icons) {
+      // Nav icons are always 18px; pages reuse some icons at other sizes.
+      final finder = find.byWidgetPredicate(
+        (w) => w is Icon && w.icon == icon && w.size == 18,
+      );
+      expect(finder, findsOneWidget, reason: 'nav bar has tab $icon');
+      await tester.tap(finder, warnIfMissed: false);
+      await tester.pumpAndSettle(const Duration(milliseconds: 300));
+
+      expect(
+        tester.takeException(),
+        isNull,
+        reason: 'no exceptions after switching tabs',
+      );
+    }
   });
 }
