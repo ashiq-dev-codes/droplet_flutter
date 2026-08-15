@@ -1,5 +1,6 @@
 import 'package:droplet_flutter/shared/theme/app_colors.dart';
 import 'package:droplet_flutter/shared/theme/app_font.dart';
+import 'package:droplet_flutter/shared/widgets/page_visibility.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -168,7 +169,7 @@ class _KcalCard extends StatefulWidget {
 }
 
 class _KcalCardState extends State<_KcalCard>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, PageVisibilityMixin {
   // One controller drives the number, rings and % so they stay in sync.
   late final AnimationController _controller = AnimationController(
     vsync: this,
@@ -176,10 +177,7 @@ class _KcalCardState extends State<_KcalCard>
   )..forward();
 
   @override
-  void didUpdateWidget(_KcalCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _controller.forward(from: 0); // replay on hot reload / tab return
-  }
+  void onBecomeVisible() => _controller.forward(from: 0);
 
   @override
   void dispose() {
@@ -354,17 +352,14 @@ class _StreakCard extends StatefulWidget {
 }
 
 class _StreakCardState extends State<_StreakCard>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, PageVisibilityMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 1300),
   )..forward();
 
   @override
-  void didUpdateWidget(_StreakCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _controller.forward(from: 0); // replay on hot reload / tab return
-  }
+  void onBecomeVisible() => _controller.forward(from: 0);
 
   @override
   void dispose() {
@@ -686,17 +681,14 @@ class _ActivitySection extends StatefulWidget {
 }
 
 class _ActivitySectionState extends State<_ActivitySection>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, PageVisibilityMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 1300),
   )..forward();
 
   @override
-  void didUpdateWidget(_ActivitySection oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _controller.forward(from: 0); // replay on hot reload / tab return
-  }
+  void onBecomeVisible() => _controller.forward(from: 0);
 
   @override
   void dispose() {
