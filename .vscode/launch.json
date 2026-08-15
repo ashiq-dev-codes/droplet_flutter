@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "droplet_flutter",
+            "name": "fitness_tracker_app",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "droplet_flutter (profile mode)",
+            "name": "fitness_tracker_app (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "droplet_flutter (release mode)",
+            "name": "fitness_tracker_app (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

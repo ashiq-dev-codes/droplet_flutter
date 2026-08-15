@@ -1,5 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:droplet_flutter/app.dart';
+import 'package:fitness_tracker_app/app.dart';
 import 'package:flutter/material.dart';
 
 class AppRoot extends StatelessWidget {

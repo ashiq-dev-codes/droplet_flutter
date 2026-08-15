@@ -1,9 +1,9 @@
-import 'package:droplet_flutter/app.dart';
-import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
-import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
-import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
-import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
-import 'package:droplet_flutter/shared/theme/app_font.dart';
+import 'package:fitness_tracker_app/app.dart';
+import 'package:fitness_tracker_app/features/profile/presentation/page/profile_page.dart';
+import 'package:fitness_tracker_app/features/progress/presentation/page/progress_page.dart';
+import 'package:fitness_tracker_app/features/today/presentation/page/today_page.dart';
+import 'package:fitness_tracker_app/features/workouts/presentation/page/workouts_page.dart';
+import 'package:fitness_tracker_app/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';

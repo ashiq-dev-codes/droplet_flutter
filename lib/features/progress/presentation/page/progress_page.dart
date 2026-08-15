@@ -1,5 +1,5 @@
-import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_font.dart';
+import 'package:fitness_tracker_app/shared/theme/app_colors.dart';
+import 'package:fitness_tracker_app/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
