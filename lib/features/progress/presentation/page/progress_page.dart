@@ -55,10 +55,12 @@ class ProgressPage extends StatelessWidget {
             children: [
               // Stats row
               _StatsRow(),
-              SizedBox(height: 24),
+              SizedBox(height: 32),
+
               // Chart
               _ActivityVolumeChart(),
-              SizedBox(height: 24),
+              SizedBox(height: 32),
+
               // Personal records
               _PersonalRecords(),
             ],
@@ -271,18 +273,38 @@ class _StatsRowState extends State<_StatsRow>
   }
 }
 
-class _ActivityVolumeChart extends StatelessWidget {
+class _ActivityVolumeChart extends StatefulWidget {
   const _ActivityVolumeChart();
 
+  @override
+  State<_ActivityVolumeChart> createState() => _ActivityVolumeChartState();
+}
+
+class _ActivityVolumeChartState extends State<_ActivityVolumeChart>
+    with SingleTickerProviderStateMixin, PageVisibilityMixin {
   static const _days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
   static const _heights = [64.0, 112.0, 48.0, 133.0, 133.0, 80.0, 32.0];
+
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..forward();
+
+  @override
+  void onBecomeVisible() => _controller.forward(from: 0);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Column(
@@ -297,20 +319,18 @@ class _ActivityVolumeChart extends StatelessWidget {
                   const Text(
                     'Activity Volume',
                     style: TextStyle(
-                      fontFamily: AppFont.spaceGrotesk,
-                      fontWeight: FontWeight.w700,
                       fontSize: 18,
-                      height: 1.55,
+                      fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
+                      fontFamily: AppFont.spaceGrotesk,
                     ),
                   ),
-                  const SizedBox(height: 2),
                   const Text(
                     'Daily burn comparison',
                     style: TextStyle(
+                      fontSize: 12,
                       fontFamily: AppFont.inter,
                       fontWeight: FontWeight.w400,
-                      fontSize: 12,
                       color: AppColors.textSecondary,
                     ),
                   ),
@@ -319,34 +339,49 @@ class _ActivityVolumeChart extends StatelessWidget {
               Icon(LucideIcons.info, size: 16, color: AppColors.textSecondary),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
           SizedBox(
             height: 160,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: List.generate(7, (i) {
-                final isActive = i == 4 || i == 5 || i == 6;
+                final isActive = i == 4;
+                final isFull = i == 1 || i == 3;
+
                 return Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        width: 33,
-                        height: _heights[i],
-                        decoration: BoxDecoration(
-                          color: isActive
-                              ? AppColors.accentLime
-                              : AppColors.divider,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
+                      AnimatedBuilder(
+                        animation: _controller,
+                        builder: (context, _) {
+                          final t = Curves.easeOutCubic.transform(
+                            _controller.value,
+                          );
+                          return Container(
+                            width: 33,
+                            height: _heights[i] * t,
+                            decoration: BoxDecoration(
+                              color: isActive
+                                  ? AppColors.accentLime
+                                  : isFull
+                                  ? AppColors.primary
+                                  : AppColors.backgroundDark,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 12),
                       Text(
                         _days[i],
                         style: TextStyle(
+                          fontSize: 10,
                           fontFamily: AppFont.inter,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
                           color: isActive
                               ? AppColors.textPrimary
                               : AppColors.textSecondary,
