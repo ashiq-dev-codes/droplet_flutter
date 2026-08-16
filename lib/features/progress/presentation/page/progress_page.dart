@@ -4,6 +4,16 @@ import 'package:fitness_tracker_app/shared/widgets/page_visibility.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+String _commaFormat(int n) {
+  final s = n.toString();
+  final out = StringBuffer();
+  for (var i = 0; i < s.length; i++) {
+    if (i > 0 && (s.length - i) % 3 == 0) out.write(',');
+    out.write(s[i]);
+  }
+  return out.toString();
+}
+
 class ProgressPage extends StatelessWidget {
   const ProgressPage({super.key});
 
@@ -63,6 +73,10 @@ class ProgressPage extends StatelessWidget {
 
               // Personal records
               _PersonalRecords(),
+              SizedBox(height: 15),
+
+              // Achievements
+              _AchievementsRow(),
             ],
           ),
         ),
@@ -399,8 +413,28 @@ class _ActivityVolumeChartState extends State<_ActivityVolumeChart>
   }
 }
 
-class _PersonalRecords extends StatelessWidget {
+class _PersonalRecords extends StatefulWidget {
   const _PersonalRecords();
+
+  @override
+  State<_PersonalRecords> createState() => _PersonalRecordsState();
+}
+
+class _PersonalRecordsState extends State<_PersonalRecords>
+    with SingleTickerProviderStateMixin, PageVisibilityMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..forward();
+
+  @override
+  void onBecomeVisible() => _controller.forward(from: 0);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -410,27 +444,30 @@ class _PersonalRecords extends StatelessWidget {
         const Text(
           'Personal Records',
           style: TextStyle(
-            fontFamily: AppFont.spaceGrotesk,
-            fontWeight: FontWeight.w700,
             fontSize: 18,
-            height: 1.55,
+            fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
+            fontFamily: AppFont.spaceGrotesk,
           ),
+        ),
+        const SizedBox(height: 16),
+        _record(
+          icon: LucideIcons.trophy,
+          iconColor: AppColors.accentLime,
+          title: 'Longest Run',
+          date: 'Oct 24, 2023',
+          targetValue: 12.4,
+          formatValue: (v) => '${v.toStringAsFixed(1)} km',
+          badge: 'New Record!',
         ),
         const SizedBox(height: 12),
         _record(
-          icon: LucideIcons.mapPin,
-          title: 'Longest Run',
-          date: 'Oct 24, 2023',
-          value: '12.4 km',
-          badge: 'New Record!',
-        ),
-        const SizedBox(height: 8),
-        _record(
           icon: LucideIcons.flame,
+          iconColor: AppColors.accentOrange,
           title: 'Max Kcal Burned',
           date: 'Jan 12, 2024',
-          value: '1,240 kcal',
+          targetValue: 1240,
+          formatValue: (v) => '${_commaFormat(v.round())} kcal',
           badge: null,
         ),
       ],
@@ -441,13 +478,15 @@ class _PersonalRecords extends StatelessWidget {
     required IconData icon,
     required String title,
     required String date,
-    required String value,
+    required num targetValue,
+    required String Function(double) formatValue,
     String? badge,
+    Color? iconColor,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.backgroundDark,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -456,10 +495,14 @@ class _PersonalRecords extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
+              shape: BoxShape.circle,
               color: AppColors.white,
-              borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, size: 20, color: AppColors.textPrimary),
+            child: Icon(
+              icon,
+              size: 20,
+              color: iconColor ?? AppColors.textPrimary,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -469,18 +512,19 @@ class _PersonalRecords extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: AppFont.spaceGrotesk,
-                    fontWeight: FontWeight.w700,
                     fontSize: 14,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
+                    fontFamily: AppFont.spaceGrotesk,
                   ),
                 ),
+                SizedBox(height: 1),
                 Text(
                   date,
                   style: const TextStyle(
+                    fontSize: 10,
                     fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w400,
-                    fontSize: 12,
                     color: AppColors.textSecondary,
                   ),
                 ),
@@ -490,29 +534,102 @@ class _PersonalRecords extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                value,
-                style: const TextStyle(
-                  fontFamily: AppFont.spaceGrotesk,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: AppColors.textPrimary,
-                ),
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, _) {
+                  final t = Curves.easeOutCubic.transform(_controller.value);
+                  return Text(
+                    formatValue(targetValue * t),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                      fontFamily: AppFont.spaceGrotesk,
+                    ),
+                  );
+                },
               ),
-              if (badge != null)
+              if (badge != null) ...[
+                const SizedBox(height: 1),
                 Text(
                   badge,
                   style: const TextStyle(
-                    fontFamily: AppFont.inter,
-                    fontWeight: FontWeight.w700,
                     fontSize: 10,
+                    fontFamily: AppFont.inter,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.accentLime,
                   ),
                 ),
+              ],
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class _AchievementsRow extends StatelessWidget {
+  const _AchievementsRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Achievements',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+                fontFamily: AppFont.spaceGrotesk,
+              ),
+            ),
+            Text(
+              'View all',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textSecondary,
+                fontFamily: AppFont.spaceGrotesk,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _achievementsCard(
+              child: Icon(LucideIcons.circle, color: AppColors.accentLime),
+            ),
+            _achievementsCard(
+              child: Icon(LucideIcons.flame, color: AppColors.accentOrange),
+            ),
+            _achievementsCard(
+              child: Icon(
+                LucideIcons.calendarDays,
+                color: AppColors.accentBlue,
+              ),
+            ),
+            _achievementsCard(
+              child: Icon(LucideIcons.star, color: AppColors.accentGold),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _achievementsCard({required Widget child}) {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(24),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.white),
+      child: child,
     );
   }
 }
