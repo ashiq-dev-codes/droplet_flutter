@@ -1,3 +1,4 @@
+import 'package:fitness_tracker_app/shared/path/app_images.dart';
 import 'package:fitness_tracker_app/shared/theme/app_colors.dart';
 import 'package:fitness_tracker_app/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
@@ -279,6 +280,10 @@ class _RecommendedSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 24),
             itemBuilder: (_, i) {
+              final images = [
+                AppImages.recommendedImg1,
+                AppImages.recommendedImg2,
+              ];
               final titles = ['Advanced Powerlifting', 'Metabolic Fire'];
               final subs = [
                 'Focus on deadlifts and overhead press',
@@ -293,31 +298,50 @@ class _RecommendedSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: Container(
-                        width: 288,
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(32),
                         child: Stack(
                           children: [
+                            Image.asset(
+                              images[i],
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    AppColors.black.withValues(alpha: 0.00),
+                                    AppColors.black.withValues(alpha: 0.60),
+                                  ],
+                                ),
+                              ),
+                            ),
                             Positioned(
-                              bottom: 12,
-                              left: 16,
-                              child: Row(
-                                children: [
-                                  _miniTag(tags[i]),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    times[i],
-                                    style: const TextStyle(
-                                      fontFamily: AppFont.inter,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                      color: AppColors.white,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    _miniTag(tags[i]),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      times[i],
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.white,
+                                        fontFamily: AppFont.inter,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -357,18 +381,18 @@ class _RecommendedSection extends StatelessWidget {
 
   Widget _miniTag(String label) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4.5, horizontal: 7),
       decoration: BoxDecoration(
-        color: AppColors.accentOrange,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
+        color: AppColors.white.withValues(alpha: 0.20),
       ),
       child: Text(
         label,
         style: const TextStyle(
-          fontFamily: AppFont.inter,
-          fontWeight: FontWeight.w600,
-          fontSize: 10,
+          fontSize: 12,
           color: AppColors.white,
+          fontFamily: AppFont.inter,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );

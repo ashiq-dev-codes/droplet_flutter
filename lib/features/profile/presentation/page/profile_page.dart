@@ -1,3 +1,4 @@
+import 'package:fitness_tracker_app/shared/path/app_images.dart';
 import 'package:fitness_tracker_app/shared/theme/app_colors.dart';
 import 'package:fitness_tracker_app/shared/theme/app_font.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _ProfileHeader extends StatelessWidget {
               backgroundColor: AppColors.surface,
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/avatar.png',
+                  AppImages.avatar,
                   width: 96,
                   height: 96,
                   fit: BoxFit.cover,

@@ -1,3 +1,4 @@
+import 'package:fitness_tracker_app/shared/path/app_images.dart';
 import 'package:fitness_tracker_app/shared/theme/app_colors.dart';
 import 'package:fitness_tracker_app/shared/theme/app_font.dart';
 import 'package:fitness_tracker_app/shared/widgets/page_visibility.dart';
@@ -76,7 +77,7 @@ class _TodayHeader extends StatelessWidget {
             backgroundColor: AppColors.surface,
             child: ClipOval(
               child: Image.asset(
-                'assets/images/avatar.png',
+                AppImages.avatar,
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,
@@ -911,7 +912,7 @@ class _WorkoutsSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _workoutTile(
-          imagePath: 'assets/images/recent_img_1.png',
+          imagePath: AppImages.recentImg1,
           tag: 'TEMPO RUN',
           tagBadge: 'PR',
           title: 'Riverside 8K',
@@ -921,7 +922,7 @@ class _WorkoutsSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _workoutTile(
-          imagePath: 'assets/images/recent_img_2.png',
+          imagePath: AppImages.recentImg2,
           tag: 'STRENGTH · PUSH',
           title: 'Upper body · heavy',
           duration: '58:04',
@@ -930,7 +931,7 @@ class _WorkoutsSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _workoutTile(
-          imagePath: 'assets/images/recent_img_3.png',
+          imagePath: AppImages.recentImg3,
           tag: 'MOBILITY',
           title: 'Morning flow',
           duration: '22:40',
