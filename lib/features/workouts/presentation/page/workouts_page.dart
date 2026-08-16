@@ -11,49 +11,56 @@ class WorkoutsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       bottom: false,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 12, bottom: 120),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                'Workouts',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                  fontFamily: AppFont.spaceGrotesk,
-                ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 12),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Text(
+              'Workouts',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+                fontFamily: AppFont.spaceGrotesk,
               ),
             ),
-            SizedBox(height: 17),
+          ),
+          SizedBox(height: 17),
 
-            // Search
-            _SearchBar(),
-            SizedBox(height: 20),
+          // Search
+          _SearchBar(),
+          SizedBox(height: 20),
 
-            // Tabs
-            _CategoryTabs(),
-            SizedBox(height: 33),
+          // Tabs
+          _CategoryTabs(),
+          SizedBox(height: 16),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(top: 17, bottom: 120),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Resume
+                  _ResumeCard(),
+                  SizedBox(height: 32),
 
-            // Resume
-            _ResumeCard(),
-            SizedBox(height: 32),
+                  // Recommended
+                  _RecommendedSection(),
+                  SizedBox(height: 32),
 
-            // Recommended
-            _RecommendedSection(),
-            SizedBox(height: 32),
+                  // Library
+                  _LibrarySection(),
+                  SizedBox(height: 24),
 
-            // Library
-            _LibrarySection(),
-            SizedBox(height: 24),
-
-            // Favorites
-            _FavoritesSection(),
-          ],
-        ),
+                  // Favorites
+                  _FavoritesSection(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

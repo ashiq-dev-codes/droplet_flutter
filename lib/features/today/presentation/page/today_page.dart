@@ -24,15 +24,20 @@ class TodayPage extends StatelessWidget {
       bottom: false,
       child: Column(
         children: [
+          SizedBox(height: 12),
           _TodayHeader(),
+
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(24, 12, 24, 120),
+              padding: EdgeInsets.only(
+                top: 8,
+                left: 24,
+                right: 24,
+                bottom: 120,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 8),
-
                   // Kcal
                   _KcalCard(),
                   SizedBox(height: 32),
