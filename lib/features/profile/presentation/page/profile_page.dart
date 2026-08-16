@@ -1,6 +1,7 @@
 import 'package:fitness_tracker_app/shared/path/app_images.dart';
 import 'package:fitness_tracker_app/shared/theme/app_colors.dart';
 import 'package:fitness_tracker_app/shared/theme/app_font.dart';
+import 'package:fitness_tracker_app/shared/widgets/page_visibility.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -187,8 +188,28 @@ class _ProfileHeader extends StatelessWidget {
   }
 }
 
-class _BodyStats extends StatelessWidget {
+class _BodyStats extends StatefulWidget {
   const _BodyStats();
+
+  @override
+  State<_BodyStats> createState() => _BodyStatsState();
+}
+
+class _BodyStatsState extends State<_BodyStats>
+    with SingleTickerProviderStateMixin, PageVisibilityMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..forward();
+
+  @override
+  void onBecomeVisible() => _controller.forward(from: 0);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -198,14 +219,14 @@ class _BodyStats extends StatelessWidget {
         color: AppColors.backgroundDark,
         borderRadius: BorderRadius.circular(32),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _Stat('AGE', '28', null),
-          _Divider(),
-          _Stat('WEIGHT', '64', 'kg'),
-          _Divider(),
-          _Stat('HEIGHT', '172', 'cm'),
+          _Stat('AGE', 28, null, _controller),
+          const _Divider(),
+          _Stat('WEIGHT', 64, 'kg', _controller),
+          const _Divider(),
+          _Stat('HEIGHT', 172, 'cm', _controller),
         ],
       ),
     );
@@ -214,10 +235,11 @@ class _BodyStats extends StatelessWidget {
 
 class _Stat extends StatelessWidget {
   final String label;
-  final String value;
+  final num targetValue;
   final String? unit;
+  final Animation<double> animation;
 
-  const _Stat(this.label, this.value, this.unit);
+  const _Stat(this.label, this.targetValue, this.unit, this.animation);
 
   @override
   Widget build(BuildContext context) {
@@ -238,14 +260,20 @@ class _Stat extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,
           children: [
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
-                fontFamily: AppFont.spaceGrotesk,
-              ),
+            AnimatedBuilder(
+              animation: animation,
+              builder: (context, _) {
+                final t = Curves.easeOutCubic.transform(animation.value);
+                return Text(
+                  (targetValue * t).round().toString(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                    fontFamily: AppFont.spaceGrotesk,
+                  ),
+                );
+              },
             ),
             if (unit != null)
               Text(
