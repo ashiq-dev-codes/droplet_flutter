@@ -1,11 +1,11 @@
-import 'package:droplet_flutter/features/profile/presentation/page/profile_page.dart';
-import 'package:droplet_flutter/features/progress/presentation/page/progress_page.dart';
-import 'package:droplet_flutter/features/timer/presentation/widgets/workout_timer_sheet.dart';
-import 'package:droplet_flutter/features/today/presentation/page/today_page.dart';
-import 'package:droplet_flutter/features/workouts/presentation/page/workouts_page.dart';
-import 'package:droplet_flutter/shared/theme/app_colors.dart';
-import 'package:droplet_flutter/shared/theme/app_font.dart';
-import 'package:droplet_flutter/shared/widgets/page_visibility.dart';
+import 'package:fitness_tracker_app/features/profile/presentation/page/profile_page.dart';
+import 'package:fitness_tracker_app/features/progress/presentation/page/progress_page.dart';
+import 'package:fitness_tracker_app/features/timer/presentation/widgets/workout_timer_sheet.dart';
+import 'package:fitness_tracker_app/features/today/presentation/page/today_page.dart';
+import 'package:fitness_tracker_app/features/workouts/presentation/page/workouts_page.dart';
+import 'package:fitness_tracker_app/shared/theme/app_colors.dart';
+import 'package:fitness_tracker_app/shared/theme/app_font.dart';
+import 'package:fitness_tracker_app/shared/widgets/page_visibility.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -206,10 +206,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     final maxCenterX = barWidth > _dragPillSize
         ? barWidth - _dragPillSize / 2
         : _dragPillSize / 2;
-    return (_dragLocalX ?? settledCenterX).clamp(
-      _dragPillSize / 2,
-      maxCenterX,
-    );
+    return (_dragLocalX ?? settledCenterX).clamp(_dragPillSize / 2, maxCenterX);
   }
 
   /// The single highlight that slides beneath the icons while dragging.
@@ -220,9 +217,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     final centerX = _pillCenterX(barWidth);
 
     return AnimatedPositioned(
-      duration: isDragging
-          ? Duration.zero
-          : const Duration(milliseconds: 320),
+      duration: isDragging ? Duration.zero : const Duration(milliseconds: 320),
       // A slight overshoot-and-settle on release/commit reads as a soft
       // spring rather than a mechanical linear stop.
       curve: Curves.easeOutBack,

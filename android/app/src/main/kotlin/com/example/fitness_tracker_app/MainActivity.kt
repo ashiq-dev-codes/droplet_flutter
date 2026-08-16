@@ -1,4 +1,4 @@
-package com.example.droplet_flutter
+package com.example.fitness_tracker_app
 
 import io.flutter.embedding.android.FlutterActivity
 

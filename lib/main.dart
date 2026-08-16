@@ -1,4 +1,4 @@
-import 'package:droplet_flutter/root.dart';
+import 'package:fitness_tracker_app/root.dart';
 import 'package:flutter/material.dart';
 
 void main() {

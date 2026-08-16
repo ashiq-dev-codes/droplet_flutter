@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:droplet_flutter/shared/theme/app_font.dart';
+import 'package:fitness_tracker_app/shared/theme/app_font.dart';
 import 'package:flutter/services.dart';
 
 /// Load the real app fonts so text metrics match the device render.

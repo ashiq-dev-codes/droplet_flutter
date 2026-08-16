@@ -1,5 +1,5 @@
-name: droplet_flutter
-description: "A new Flutter project."
+name: fitness_tracker_app
+description: "Fitness Tracker App"
 publish_to: "none"
 
 version: 1.0.0+1
