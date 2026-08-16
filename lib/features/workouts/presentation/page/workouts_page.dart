@@ -39,7 +39,7 @@ class WorkoutsPage extends StatelessWidget {
 
             // Resume
             _ResumeCard(),
-            SizedBox(height: 24),
+            SizedBox(height: 32),
 
             // Recommended
             _RecommendedSection(),
@@ -252,32 +252,32 @@ class _RecommendedSection extends StatelessWidget {
               const Text(
                 'Recommended for you',
                 style: TextStyle(
-                  fontFamily: AppFont.spaceGrotesk,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
+                  fontFamily: AppFont.spaceGrotesk,
                 ),
               ),
               const Text(
                 'See all',
                 style: TextStyle(
-                  fontFamily: AppFont.inter,
-                  fontWeight: FontWeight.w400,
                   fontSize: 12,
+                  fontFamily: AppFont.inter,
+                  fontWeight: FontWeight.w700,
                   color: AppColors.textSecondary,
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
+
         SizedBox(
-          height: 280,
+          height: 240,
           child: ListView.separated(
             itemCount: 2,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 24),
-            separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (_, i) {
               final titles = ['Advanced Powerlifting', 'Metabolic Fire'];
               final subs = [
@@ -286,31 +286,12 @@ class _RecommendedSection extends StatelessWidget {
               ];
               final tags = ['Strength', 'HIIT'];
               final times = ['45 min', '25 min'];
+
               return SizedBox(
                 width: 288,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      titles[i],
-                      style: const TextStyle(
-                        fontFamily: AppFont.spaceGrotesk,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subs[i],
-                      style: const TextStyle(
-                        fontFamily: AppFont.inter,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
                     Expanded(
                       child: Container(
                         width: 288,
@@ -343,10 +324,31 @@ class _RecommendedSection extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(height: 12),
+                    Text(
+                      titles[i],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                        fontFamily: AppFont.spaceGrotesk,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subs[i],
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: AppFont.inter,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
                   ],
                 ),
               );
             },
+            separatorBuilder: (_, _) => const SizedBox(width: 16),
           ),
         ),
       ],
