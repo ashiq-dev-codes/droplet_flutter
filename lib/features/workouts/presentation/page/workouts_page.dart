@@ -302,20 +302,24 @@ class _RecommendedSection extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32),
                         child: Stack(
                           children: [
-                            Image.asset(
-                              images[i],
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
+                            Positioned.fill(
+                              child: Image.asset(
+                                images[i],
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                              ),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    AppColors.black.withValues(alpha: 0.00),
-                                    AppColors.black.withValues(alpha: 0.60),
-                                  ],
+                            Positioned.fill(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      AppColors.black.withValues(alpha: 0.00),
+                                      AppColors.black.withValues(alpha: 0.60),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
