@@ -10,4 +10,8 @@ class AppImages {
   // Recommended
   static const String recommendedImg1 = 'assets/images/recommended_img_1.png';
   static const String recommendedImg2 = 'assets/images/recommended_img_2.png';
+
+  // Library
+  static const String libraryImg1 = 'assets/images/library_img_1.png';
+  static const String libraryImg2 = 'assets/images/library_img_2.png';
 }

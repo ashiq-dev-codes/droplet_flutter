@@ -44,7 +44,7 @@ class WorkoutsPage extends StatelessWidget {
 
             // Recommended
             _RecommendedSection(),
-            SizedBox(height: 24),
+            SizedBox(height: 32),
 
             // Library
             _LibrarySection(),
@@ -379,6 +379,7 @@ class _RecommendedSection extends StatelessWidget {
             separatorBuilder: (_, _) => const SizedBox(width: 16),
           ),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
@@ -416,20 +417,22 @@ class _LibrarySection extends StatelessWidget {
           const Text(
             'Library',
             style: TextStyle(
-              fontFamily: AppFont.spaceGrotesk,
-              fontWeight: FontWeight.w700,
               fontSize: 18,
+              fontWeight: FontWeight.bold,
               color: AppColors.textPrimary,
+              fontFamily: AppFont.spaceGrotesk,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Row(
             children: [
               Expanded(
-                child: _libraryCard('Yoga & Flow', LucideIcons.sparkles),
+                child: _libraryCard('Yoga & Flow', AppImages.libraryImg1),
               ),
               const SizedBox(width: 12),
-              Expanded(child: _libraryCard('Pure Cardio', LucideIcons.flame)),
+              Expanded(
+                child: _libraryCard('Pure Cardio', AppImages.libraryImg2),
+              ),
             ],
           ),
         ],
@@ -437,38 +440,44 @@ class _LibrarySection extends StatelessWidget {
     );
   }
 
-  Widget _libraryCard(String title, IconData icon) {
+  Widget _libraryCard(String title, String image) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 139,
-          width: double.infinity,
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(20),
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(32),
           ),
-          child: Icon(icon, size: 40, color: AppColors.textSecondary),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: AppColors.textPrimary,
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(image, width: 139, height: 139),
               ),
-            ),
-            Icon(
-              LucideIcons.playCircle,
-              size: 16,
-              color: AppColors.textSecondary,
-            ),
-          ],
+              SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                      fontFamily: AppFont.spaceGrotesk,
+                    ),
+                  ),
+                  Icon(
+                    LucideIcons.arrowRight,
+                    size: 16,
+                    color: AppColors.textSecondary,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -485,18 +494,24 @@ class _FavoritesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Favorites',
-            style: TextStyle(
-              fontFamily: AppFont.spaceGrotesk,
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-              color: AppColors.textPrimary,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Favorites',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                  fontFamily: AppFont.spaceGrotesk,
+                ),
+              ),
+              Icon(LucideIcons.heart, size: 18, color: AppColors.accentOrange),
+            ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           _favoriteTile('Morning Mobility A', '15 mins · Light', 12),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           _favoriteTile('Full Body Burn', '45 mins · Advanced', 45),
         ],
       ),
@@ -505,9 +520,9 @@ class _FavoritesSection extends StatelessWidget {
 
   Widget _favoriteTile(String title, String subtitle, int index) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
@@ -517,16 +532,16 @@ class _FavoritesSection extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(12),
+              color: AppColors.backgroundDark,
+              borderRadius: BorderRadius.circular(20),
             ),
             alignment: Alignment.center,
             child: Text(
               '$index',
               style: const TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w700,
                 fontSize: 16,
+                fontFamily: AppFont.inter,
+                fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
               ),
             ),
@@ -539,28 +554,35 @@ class _FavoritesSection extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: AppFont.spaceGrotesk,
-                    fontWeight: FontWeight.w700,
                     fontSize: 14,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
+                    fontFamily: AppFont.spaceGrotesk,
                   ),
                 ),
                 Text(
                   subtitle,
                   style: const TextStyle(
+                    fontSize: 10,
                     fontFamily: AppFont.inter,
                     fontWeight: FontWeight.w400,
-                    fontSize: 12,
                     color: AppColors.textSecondary,
                   ),
                 ),
               ],
             ),
           ),
-          Icon(
-            LucideIcons.playCircle,
-            size: 20,
-            color: AppColors.textSecondary,
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.backgroundDark,
+            ),
+            child: Icon(
+              LucideIcons.play,
+              size: 20,
+              color: AppColors.textPrimary,
+            ),
           ),
         ],
       ),
