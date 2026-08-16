@@ -26,7 +26,7 @@ class TodayPage extends StatelessWidget {
           _TodayHeader(),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(24, 16, 24, 120),
+              padding: EdgeInsets.fromLTRB(24, 12, 24, 120),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

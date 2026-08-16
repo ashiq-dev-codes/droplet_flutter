@@ -11,32 +11,45 @@ class WorkoutsPage extends StatelessWidget {
     return const SafeArea(
       bottom: false,
       child: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(24, 16, 24, 120),
+        padding: EdgeInsets.only(top: 12, bottom: 120),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Workouts',
-              style: TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w700,
-                fontSize: 30,
-                height: 1.2,
-                letterSpacing: -0.75,
-                color: AppColors.textPrimary,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                'Workouts',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                  fontFamily: AppFont.spaceGrotesk,
+                ),
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 17),
+
+            // Search
             _SearchBar(),
-            SizedBox(height: 16),
-            _CategoryTabs(),
             SizedBox(height: 20),
+
+            // Tabs
+            _CategoryTabs(),
+            SizedBox(height: 33),
+
+            // Resume
             _ResumeCard(),
             SizedBox(height: 24),
+
+            // Recommended
             _RecommendedSection(),
             SizedBox(height: 24),
+
+            // Library
             _LibrarySection(),
             SizedBox(height: 24),
+
+            // Favorites
             _FavoritesSection(),
           ],
         ),
@@ -52,22 +65,23 @@ class _SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 48,
+      margin: EdgeInsets.symmetric(horizontal: 24),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
+        color: AppColors.backgroundDark,
+        borderRadius: BorderRadius.circular(24),
       ),
       child: const Row(
         children: [
           Icon(LucideIcons.search, size: 18, color: AppColors.textSecondary),
-          SizedBox(width: 10),
+          SizedBox(width: 7),
           Text(
             'Search routines, exercises...',
             style: TextStyle(
+              fontSize: 14,
               fontFamily: AppFont.inter,
               fontWeight: FontWeight.w400,
-              fontSize: 14,
-              color: AppColors.textSecondary,
+              color: AppColors.textPrimary,
             ),
           ),
         ],
@@ -82,32 +96,35 @@ class _CategoryTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const tabs = ['All', 'Strength', 'Cardio', 'Yoga', 'HIIT'];
+
     return SizedBox(
       height: 40,
       child: ListView.separated(
-        scrollDirection: Axis.horizontal,
         itemCount: tabs.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 8),
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 24),
         itemBuilder: (_, i) {
           final active = i == 0;
+
           return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: active ? AppColors.textPrimary : AppColors.surface,
-              borderRadius: BorderRadius.circular(12),
-            ),
             alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 8.5, horizontal: 19),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(111),
+              color: active ? AppColors.primary : AppColors.white,
+            ),
             child: Text(
               tabs[i],
               style: TextStyle(
-                fontFamily: AppFont.inter,
-                fontWeight: active ? FontWeight.w700 : FontWeight.w400,
                 fontSize: 12,
+                fontFamily: AppFont.inter,
+                fontWeight: FontWeight.w700,
                 color: active ? AppColors.white : AppColors.textPrimary,
               ),
             ),
           );
         },
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
       ),
     );
   }
@@ -119,112 +136,93 @@ class _ResumeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 153,
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        color: AppColors.textPrimary,
+        color: AppColors.accentLime,
         borderRadius: BorderRadius.circular(32),
       ),
-      child: Row(
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          // Avatar placeholder
-          Container(
-            width: 96,
-            height: 96,
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Icon(
-              LucideIcons.play,
-              size: 32,
-              color: AppColors.accentOrange,
+          Positioned(
+            right: -30,
+            child: Icon(
+              LucideIcons.dumbbell,
+              size: 111,
+              color: AppColors.textPrimary.withValues(alpha: 0.10),
             ),
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
               children: [
-                const Text(
-                  'RESUME LAST',
-                  style: TextStyle(
-                    fontFamily: AppFont.inter,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 10,
-                    letterSpacing: 2.0,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    const Flexible(
-                      child: Text(
-                        'Upper Body',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontFamily: AppFont.spaceGrotesk,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '·',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Flexible(
-                      child: Text(
-                        'Hypertrophy',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontFamily: AppFont.spaceGrotesk,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                // START NOW button
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.accentLime,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'START NOW',
+                      const Text(
+                        'RESUME LAST',
                         style: TextStyle(
+                          fontSize: 10,
+                          letterSpacing: 2.0,
                           fontFamily: AppFont.inter,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12,
-                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textSecondary,
                         ),
                       ),
-                      SizedBox(width: 6),
-                      Icon(
-                        LucideIcons.arrowRight,
-                        size: 14,
-                        color: AppColors.textPrimary,
+                      const SizedBox(height: 4),
+
+                      Text(
+                        'Upper Body',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                          fontFamily: AppFont.spaceGrotesk,
+                        ),
+                      ),
+                      Text(
+                        'Hypertrophy',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                          fontFamily: AppFont.spaceGrotesk,
+                        ),
+                      ),
+                      const SizedBox(height: 11.5),
+
+                      // START NOW button
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 16,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(111),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'START NOW',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.white,
+                                fontFamily: AppFont.inter,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 10.92),
+                            Icon(
+                              LucideIcons.playDir,
+                              size: 14,
+                              color: AppColors.white,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -246,35 +244,39 @@ class _RecommendedSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Recommended for you',
-              style: TextStyle(
-                fontFamily: AppFont.spaceGrotesk,
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-                color: AppColors.textPrimary,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Recommended for you',
+                style: TextStyle(
+                  fontFamily: AppFont.spaceGrotesk,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                  color: AppColors.textPrimary,
+                ),
               ),
-            ),
-            const Text(
-              'See all',
-              style: TextStyle(
-                fontFamily: AppFont.inter,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: AppColors.textSecondary,
+              const Text(
+                'See all',
+                style: TextStyle(
+                  fontFamily: AppFont.inter,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: AppColors.textSecondary,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         SizedBox(
           height: 280,
           child: ListView.separated(
-            scrollDirection: Axis.horizontal,
             itemCount: 2,
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: 24),
             separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (_, i) {
               final titles = ['Advanced Powerlifting', 'Metabolic Fire'];
@@ -376,27 +378,32 @@ class _LibrarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Library',
-          style: TextStyle(
-            fontFamily: AppFont.spaceGrotesk,
-            fontWeight: FontWeight.w700,
-            fontSize: 18,
-            color: AppColors.textPrimary,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Library',
+            style: TextStyle(
+              fontFamily: AppFont.spaceGrotesk,
+              fontWeight: FontWeight.w700,
+              fontSize: 18,
+              color: AppColors.textPrimary,
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(child: _libraryCard('Yoga & Flow', LucideIcons.sparkles)),
-            const SizedBox(width: 12),
-            Expanded(child: _libraryCard('Pure Cardio', LucideIcons.flame)),
-          ],
-        ),
-      ],
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _libraryCard('Yoga & Flow', LucideIcons.sparkles),
+              ),
+              const SizedBox(width: 12),
+              Expanded(child: _libraryCard('Pure Cardio', LucideIcons.flame)),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -443,23 +450,26 @@ class _FavoritesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Favorites',
-          style: TextStyle(
-            fontFamily: AppFont.spaceGrotesk,
-            fontWeight: FontWeight.w700,
-            fontSize: 18,
-            color: AppColors.textPrimary,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Favorites',
+            style: TextStyle(
+              fontFamily: AppFont.spaceGrotesk,
+              fontWeight: FontWeight.w700,
+              fontSize: 18,
+              color: AppColors.textPrimary,
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        _favoriteTile('Morning Mobility A', '15 mins · Light', 12),
-        const SizedBox(height: 8),
-        _favoriteTile('Full Body Burn', '45 mins · Advanced', 45),
-      ],
+          const SizedBox(height: 12),
+          _favoriteTile('Morning Mobility A', '15 mins · Light', 12),
+          const SizedBox(height: 8),
+          _favoriteTile('Full Body Burn', '45 mins · Advanced', 45),
+        ],
+      ),
     );
   }
 
