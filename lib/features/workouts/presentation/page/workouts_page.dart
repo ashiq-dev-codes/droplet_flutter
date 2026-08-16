@@ -9,58 +9,66 @@ class WorkoutsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       bottom: false,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 12),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Text(
-              'Workouts',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
-                fontFamily: AppFont.spaceGrotesk,
-              ),
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            pinned: true,
+            elevation: 0,
+            floating: false,
+            titleSpacing: 24,
+            toolbarHeight: 53,
+            scrolledUnderElevation: 0,
+            automaticallyImplyLeading: false,
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: AppColors.background,
+            title: Row(
+              children: [
+                const Text(
+                  'Workouts',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                    fontFamily: AppFont.spaceGrotesk,
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 17),
+          SliverToBoxAdapter(child: SizedBox(height: 7)),
 
           // Search
-          _SearchBar(),
-          SizedBox(height: 20),
+          SliverToBoxAdapter(child: _SearchBar()),
+          SliverToBoxAdapter(child: SizedBox(height: 20)),
 
           // Tabs
-          _CategoryTabs(),
-          SizedBox(height: 16),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.only(top: 17, bottom: 120),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Resume
-                  _ResumeCard(),
-                  SizedBox(height: 32),
-
-                  // Recommended
-                  _RecommendedSection(),
-                  SizedBox(height: 32),
-
-                  // Library
-                  _LibrarySection(),
-                  SizedBox(height: 24),
-
-                  // Favorites
-                  _FavoritesSection(),
-                ],
-              ),
-            ),
-          ),
+          SliverToBoxAdapter(child: _CategoryTabs()),
+          SliverToBoxAdapter(child: SizedBox(height: 16)),
         ],
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 17, bottom: 120),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Resume
+              _ResumeCard(),
+              SizedBox(height: 32),
+
+              // Recommended
+              _RecommendedSection(),
+              SizedBox(height: 32),
+
+              // Library
+              _LibrarySection(),
+              SizedBox(height: 24),
+
+              // Favorites
+              _FavoritesSection(),
+            ],
+          ),
+        ),
       ),
     );
   }
